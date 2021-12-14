@@ -7,6 +7,7 @@
       <ul class="task__lists" *ngFor="let item of taskInfo">
         <li class="task__list">
           <span class="task__title">{{ item.title }}</span>
+          <a routerLink="/edit/{{item.id}}" >編集</a>
           <button class="task__delete" (click)="deleteTask(item.id)">削除</button>
         </li>
       </ul>
