@@ -11,7 +11,7 @@ import { TaskResponseDto } from '../type/response/type';
 })
 export class TodoComponent implements OnInit {
   taskInfo: TaskInfo[] = [];
-  taskTitle: string = ''
+  taskTitle: string = '';
 
   constructor(private http: TaskService) {}
 
@@ -26,10 +26,10 @@ export class TodoComponent implements OnInit {
   }
 
   addTask(title: string): void {
-    if(!title.trim()) return
+    if (!title.trim()) return;
     this.http.createTask({ title, done: false }).subscribe((res) => {
       if (res === 1) {
-        this.taskTitle = ''
+        this.taskTitle = '';
         this.getTask();
       }
     });
@@ -39,6 +39,14 @@ export class TodoComponent implements OnInit {
 
   deleteTask(id: number): void {
     this.http.deleteTask(id).subscribe((res) => {
+      if (res === 1) {
+        this.getTask();
+      }
+    });
+  }
+
+  doneTask(id: number, bool: boolean) {
+    this.http.doneTask(id, bool).subscribe((res) => {
       if (res === 1) {
         this.getTask();
       }

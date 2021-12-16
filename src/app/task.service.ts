@@ -44,4 +44,9 @@ export class TaskService {
     const url = `${this.host}/one-task?id=${id}`;
     return this.http.get<TaskInfo>(url, <Object>this.httpOptions);
   }
+
+  public doneTask(id: number, bool: boolean): Observable<number> {
+    const url = `${this.host}/done-task`;
+    return this.http.put<number>(url, {id, bool}, <Object>this.httpOptions);
+  }
 }

@@ -5,9 +5,19 @@
     <button class="task__add" (click)="addTask(taskTitle)">追加</button>
     <div *ngIf="taskInfo != null">
       <ul class="task__lists" *ngFor="let item of taskInfo">
-        <li class="task__list">
+        <li class="task__list" *ngIf="!item.done">
           <span class="task__title">{{ item.title }}</span>
           <a routerLink="/edit/{{item.id}}" >編集</a>
+          <button class="task__done" (click)="doneTask(item.id, true)">完了</button>
+        </li>
+      </ul>
+    </div>
+    <h2>完了タスク</h2>
+    <div *ngIf="taskInfo != null">
+      <ul class="task__lists" *ngFor="let item of taskInfo">
+        <li class="task__list" *ngIf="item.done">
+          <span class="task__title">{{ item.title }}</span>
+          <button class="task__notdone" (click)="doneTask(item.id, false)">戻す</button>
           <button class="task__delete" (click)="deleteTask(item.id)">削除</button>
         </li>
       </ul>
