@@ -1,7 +1,7 @@
 <p>{{taskTitle}}</p>
 <div class="task">
   <div class="task__block">
-    <input type="text" name="" id="" class="task__input" [(ngModel)]="taskTitle">
+    <input type="text" name="" id="" class="task__input" [(ngModel)]="taskTitle" (keyup.enter)="addTask(taskTitle)">
     <button class="task__add" (click)="addTask(taskTitle)">追加</button>
     <div *ngIf="taskInfo != null">
       <ul class="task__lists" *ngFor="let item of taskInfo">
