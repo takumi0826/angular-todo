@@ -1,26 +1,39 @@
 <p>{{taskTitle}}</p>
 <div class="task">
-  <div class="task__block">
-    <input type="text" name="" id="" class="task__input" [(ngModel)]="taskTitle" (keyup.enter)="addTask(taskTitle)">
-    <button class="task__add" (click)="addTask(taskTitle)">追加</button>
-    <div *ngIf="taskInfo != null">
-      <ul class="task__lists" *ngFor="let item of taskInfo">
-        <li class="task__list" *ngIf="!item.done">
-          <span class="task__title">{{ item.title }}</span>
-          <a routerLink="/edit/{{item.id}}" >編集</a>
-          <button class="task__done" (click)="doneTask(item.id, true)">完了</button>
-        </li>
-      </ul>
+  <div class="task__body">
+    <div class="task__block">
+      <h2 class="task__head">タスク</h2>
+      <div class="task__inputWrap">
+        <input type="text" name="" id="" class="task__input" [(ngModel)]="taskTitle" (keyup.enter)="addTask(taskTitle)">
+        <button class="task__button" (click)="addTask(taskTitle)">追加</button>
+      </div>
+      <div *ngIf="taskInfo != null">
+        <ul class="task__lists">
+          <li class="task__list" *ngFor="let item of taskInfo">
+            <ng-template [ngIf]="!item.done">
+              <span class="task__title">{{ item.title }}</span>
+              <div class="task__buttonWrap">
+                <a class="task__button task__button--edit" routerLink="/edit/{{item.id}}" >編集</a>
+                <button class="task__button task__button--complete" (click)="doneTask(item.id, true)">完了</button>
+              </div>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
     </div>
-    <h2>完了タスク</h2>
-    <div *ngIf="taskInfo != null">
-      <ul class="task__lists" *ngFor="let item of taskInfo">
-        <li class="task__list" *ngIf="item.done">
-          <span class="task__title">{{ item.title }}</span>
-          <button class="task__notdone" (click)="doneTask(item.id, false)">戻す</button>
-          <button class="task__delete" (click)="deleteTask(item.id)">削除</button>
-        </li>
-      </ul>
+    <div class="task__block">
+      <h2 class="task__head">完了タスク</h2>
+      <div *ngIf="taskInfo != null">
+        <ul class="task__lists">
+          <li class="task__list" *ngFor="let item of taskInfo">
+            <ng-template [ngIf]="item.done">
+              <span class="task__title">{{ item.title }}</span>
+              <button class="task__button" (click)="doneTask(item.id, false)">戻す</button>
+              <button class="task__button" (click)="deleteTask(item.id)">削除</button>
+            </ng-template>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
