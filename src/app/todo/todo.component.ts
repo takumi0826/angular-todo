@@ -45,8 +45,8 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  doneTask(id: number, bool: boolean) {
-    this.http.doneTask(id, bool).subscribe((res) => {
+  doneTask(id: number, done: boolean) {
+    this.http.doneTask(id, done).subscribe((res) => {
       if (res === 1) {
         this.getTask();
       }
