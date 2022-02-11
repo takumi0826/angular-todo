@@ -7,12 +7,11 @@
   }
 
   &__block {
-    width: 400px;
     padding: 24px;
   }
 
   &__head {
-    font-size: 4rem;
+    font-size: 2rem;
     text-align: center;
   }
 
@@ -26,7 +25,7 @@
     justify-content: space-between;
   }
 
-  &__list + &__list{
+  &__list + &__list {
     margin-top: 12px;
   }
 
@@ -36,27 +35,11 @@
   }
 
   &__buttonWrap {
-        margin-left: 12px;
-        display: flex;
+    margin-left: 12px;
+    display: flex;
   }
 
   &__button {
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    width: 40px;
-    height: 26px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &--edit {
-      background-color: #e5fdfa;
-    }
-
-    &--complete {
-      background-color: #e5e8fd;
-    }
   }
 
   &__button + &__button {
@@ -68,12 +51,21 @@
   }
 
   &__inputWrap {
-    margin-top: 32px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
   }
 
   &__input {
     flex: 1;
   }
+
+  &__add {
+    margin-left: 24px;
+  }
+}
+
+.mat-form-field {
+  display: block;
+  flex: 1;
 }

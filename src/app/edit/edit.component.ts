@@ -14,8 +14,8 @@ export class EditComponent implements OnInit {
   taskInfo: TaskInfo = {
     id: 0,
     title: '',
-    done: false
-  }
+    done: false,
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -31,8 +31,8 @@ export class EditComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.routeId = id;
     this.taskService.getOneTask(id).subscribe((res) => {
-      this.taskInfo = res
-    })
+      this.taskInfo = res;
+    });
   }
 
   edit(task: TaskInfo) {
@@ -40,6 +40,10 @@ export class EditComponent implements OnInit {
       if (res === 1) {
         this.router.navigateByUrl('/');
       }
-    })
+    });
+  }
+
+  routeLink(url: string) {
+    this.router.navigateByUrl(url);
   }
 }

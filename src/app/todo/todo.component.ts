@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TaskService } from '../task.service';
 import { TaskInfo, TaskItem } from '../type';
@@ -13,7 +14,7 @@ export class TodoComponent implements OnInit {
   taskInfo: TaskInfo[] = [];
   taskTitle: string = '';
 
-  constructor(private http: TaskService) {}
+  constructor(private http: TaskService, private router: Router) {}
 
   ngOnInit(): void {
     this.getTask();
@@ -51,5 +52,9 @@ export class TodoComponent implements OnInit {
         this.getTask();
       }
     });
+  }
+
+  routeLink(url: string) {
+    this.router.navigateByUrl(url);
   }
 }
