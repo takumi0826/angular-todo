@@ -1,9 +1,8 @@
 <div class="task">
   <div class="task__block">
-    <h2 class="task__head">タスク</h2>
     <div class="task__inputWrap">
       <mat-form-field class="example-form-field" appearance="fill">
-        <mat-label>Clearable input</mat-label>
+        <mat-label>タスクの入力</mat-label>
         <input
           matInput
           type="text"
@@ -29,63 +28,61 @@
         追加
       </button>
     </div>
-    <div *ngIf="taskInfo != null">
-      <ul class="task__lists">
-        <li class="task__list" *ngFor="let item of taskInfo">
-          <ng-template [ngIf]="!item.done">
-            <span class="task__title">{{ item.title }}</span>
-            <div class="task__buttonWrap">
-              <button
-                mat-fab
-                color="primary"
-                aria-label="Example icon button with a vertical three dot icon"
-                (click)="routeLink('/edit/' + item.id)"
-              >
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <button
-                class="task__button"
-                mat-fab
-                color="accent"
-                aria-label="Example icon button with a delete icon"
-                (click)="doneTask(item.id, true)"
-              >
-                <mat-icon>done</mat-icon>
-              </button>
-            </div>
-          </ng-template>
-        </li>
-      </ul>
-    </div>
+    <mat-list class="task__list" role="list" *ngIf="incompleteTask != null">
+      <mat-list-item role="listitem" *ngFor="let item of incompleteTask">
+        <span class="task__title">{{ item.title }}</span>
+        <mat-divider></mat-divider>
+        <div class="task__buttonWrap">
+          <button
+            class="task__button"
+            mat-mini-fab
+            color="primary"
+            aria-label="Example icon button with a vertical three dot icon"
+            (click)="routeLink('/edit/' + item.id)"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <button
+            class="task__button"
+            mat-mini-fab
+            color="accent"
+            aria-label="Example icon button with a delete icon"
+            (click)="doneTask(item.id, true)"
+          >
+            <mat-icon>done</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </div>
   <div class="task__block">
     <h2 class="task__head">完了タスク</h2>
-    <div *ngIf="taskInfo != null">
-      <ul class="task__lists">
-        <li class="task__list" *ngFor="let item of taskInfo">
-          <ng-template [ngIf]="item.done">
-            <span class="task__title">{{ item.title }}</span>
-            <button
-              mat-fab
-              color="basic"
-              aria-label="Example icon button with a delete icon"
-              (click)="doneTask(item.id, false)"
-            >
-              <mat-icon>keyboard_backspace</mat-icon>
-            </button>
-            <button
-              class="task__button"
-              mat-fab
-              color="warn"
-              aria-label="Example icon button with a delete icon"
-              (click)="deleteTask(item.id)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </ng-template>
-        </li>
-      </ul>
-    </div>
+    <mat-list class="task__list" role="list" *ngIf="completeTask != null">
+      <mat-list-item role="listitem" *ngFor="let item of completeTask">
+        <span class="task__title">{{ item.title }}</span>
+        <mat-divider></mat-divider>
+        <div class="task__buttonWrap">
+          <button
+            class="task__button"
+            mat-mini-fab
+            color="basic"
+            aria-label="Example icon button with a delete icon"
+            (click)="doneTask(item.id, false)"
+          >
+            <mat-icon>keyboard_backspace</mat-icon>
+          </button>
+          <button
+            class="task__button"
+            mat-mini-fab
+            color="warn"
+            aria-label="Example icon button with a delete icon"
+            (click)="deleteTask(item.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
   </div>
 </div>
 <app-modal></app-modal>

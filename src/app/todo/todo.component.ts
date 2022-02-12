@@ -11,7 +11,8 @@ import { TaskResponseDto } from '../type/response/type';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
-  taskInfo: TaskInfo[] = [];
+  completeTask: TaskInfo[] = [];
+  incompleteTask: TaskInfo[] = [];
   taskTitle: string = '';
 
   constructor(private http: TaskService, private router: Router) {}
@@ -22,7 +23,8 @@ export class TodoComponent implements OnInit {
 
   getTask(): void {
     this.http.getTask().subscribe((res) => {
-      this.taskInfo = res;
+      this.completeTask = res.filter((v) => v.done);
+      this.incompleteTask = res.filter((v) => !v.done);
     });
   }
 

@@ -15,17 +15,19 @@
     text-align: center;
   }
 
-  &__lists {
+  &__list {
     margin-top: 24px;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  &__list {
+  &__listItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  &__list + &__list {
+  &__listItem + &__listItem {
     margin-top: 12px;
   }
 
