@@ -1,6 +1,10 @@
 <mat-form-field class="example-form-field" appearance="fill">
-  <mat-label>Clearable input</mat-label>
+  <mat-label>タイトル</mat-label>
   <input matInput type="text" [(ngModel)]="taskInfo.title" />
+</mat-form-field>
+<mat-form-field class="example-full-width" appearance="fill">
+  <mat-label>内容</mat-label>
+  <textarea matInput placeholder="" [(ngModel)]="taskInfo.content"></textarea>
 </mat-form-field>
 <button mat-raised-button color="primary" (click)="edit(taskInfo)">編集</button>
 <button mat-raised-button color="basic" (click)="routeLink('/')">戻る</button>

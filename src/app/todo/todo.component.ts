@@ -23,37 +23,51 @@ export class TodoComponent implements OnInit {
 
   getTask(): void {
     this.http.getTask().subscribe((res) => {
-      this.completeTask = res.filter((v) => v.done);
-      this.incompleteTask = res.filter((v) => !v.done);
+      this.completeTask = res.filter((v) => v.isDone);
+      this.incompleteTask = res.filter((v) => !v.isDone);
     });
   }
 
   addTask(title: string): void {
     if (!title.trim()) return;
-    this.http.createTask({ title, done: false }).subscribe((res) => {
-      if (res === 1) {
+    const param = {
+      title,
+      content: '',
+      isDone: false,
+    };
+    this.http.createTask(param).subscribe(
+      (res) => {
         this.taskTitle = '';
         this.getTask();
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
   }
 
   updateTask(): void {}
 
   deleteTask(id: number): void {
-    this.http.deleteTask(id).subscribe((res) => {
-      if (res === 1) {
+    this.http.deleteTask(id).subscribe(
+      (res) => {
         this.getTask();
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
   }
 
-  doneTask(id: number, done: boolean) {
-    this.http.doneTask(id, done).subscribe((res) => {
-      if (res === 1) {
+  doneTask(id: number, isDone: boolean) {
+    this.http.doneTask(id, isDone).subscribe(
+      (res) => {
         this.getTask();
+      },
+      (error) => {
+        console.log(error);
       }
-    });
+    );
   }
 
   routeLink(url: string) {

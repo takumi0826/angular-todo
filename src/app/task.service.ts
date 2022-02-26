@@ -10,7 +10,7 @@ import { TaskResponseDto } from './type/response/type';
   providedIn: 'root',
 })
 export class TaskService {
-  private host: string = 'http://localhost:8080/api';
+  private host: string = 'http://localhost:3000/task';
   private httpOptions: any = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,32 +21,32 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   public createTask(task: TaskItem): Observable<number> {
-    const url = `${this.host}/insert-task`;
+    const url = `${this.host}/create/v1`;
     return this.http.post<number>(url, task, <Object>this.httpOptions);
   }
 
   public getTask(): Observable<TaskInfo[]> {
-    const url = `${this.host}/get-task`;
+    const url = `${this.host}/get-all/v1`;
     return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions);
   }
 
   public updateTask(task: TaskInfo): Observable<number> {
-    const url = `${this.host}/update-task`;
+    const url = `${this.host}/update/v1`;
     return this.http.put<number>(url, task, <Object>this.httpOptions);
   }
 
   public deleteTask(id: number): Observable<number> {
-    const url = `${this.host}/delete-task/${id}`;
+    const url = `${this.host}/delete/v1?id=${id}`;
     return this.http.delete<number>(url, <Object>this.httpOptions);
   }
 
   public getOneTask(id: number): Observable<TaskInfo> {
-    const url = `${this.host}/one-task?id=${id}`;
+    const url = `${this.host}/get-one/v1?id=${id}`;
     return this.http.get<TaskInfo>(url, <Object>this.httpOptions);
   }
 
-  public doneTask(id: number, done: boolean): Observable<number> {
-    const url = `${this.host}/done-task`;
-    return this.http.put<number>(url, { id, done }, <Object>this.httpOptions);
+  public doneTask(id: number, isDone: boolean): Observable<number> {
+    const url = `${this.host}/done/v1`;
+    return this.http.put<number>(url, { id, isDone }, <Object>this.httpOptions);
   }
 }

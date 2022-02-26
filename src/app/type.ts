@@ -1,13 +1,13 @@
 export type TaskInfo = {
   id: number;
   title: string;
-  done: boolean;
+  content?: string;
+  isDone: boolean;
 };
 
-export type TaskItem = Pick<TaskInfo, 'title' | 'done'>;
+export type TaskItem = Pick<TaskInfo, 'title' | 'isDone'>;
 
 export type Login = {
   userId: string;
   password: string;
 };
-
