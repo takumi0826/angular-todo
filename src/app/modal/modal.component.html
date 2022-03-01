@@ -1,2 +1,2 @@
-<div class="modal" [class.is-active]="open" (click)="closeModal()"></div>
-<button (click)="openModal()">開く</button>
+<h1 mat-dialog-title>タイトルは必須です。</h1>
+<div mat-dialog-content *ngIf="data.message">{{ data.message }}</div>

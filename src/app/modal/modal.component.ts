@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+
+import { DialogData } from '../type';
 
 @Component({
   selector: 'app-modal',
@@ -6,17 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-  constructor() {}
-
-  open: boolean = false;
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit(): void {}
-
-  openModal() {
-    this.open = true;
-  }
-
-  closeModal() {
-    this.open = false;
-  }
 }

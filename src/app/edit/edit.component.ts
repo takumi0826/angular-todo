@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { ModalComponent } from '../modal/modal.component';
 import { TaskService } from '../task.service';
 import { TaskInfo } from '../type';
 
@@ -21,7 +23,8 @@ export class EditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +40,10 @@ export class EditComponent implements OnInit {
   }
 
   edit(task: TaskInfo) {
+    if (!task.title.trim()) {
+      this.openDialog('こっちから渡してみる');
+      return;
+    }
     this.taskService.updateTask(task).subscribe(
       (res) => {
         this.router.navigateByUrl('/');
@@ -49,5 +56,13 @@ export class EditComponent implements OnInit {
 
   routeLink(url: string) {
     this.router.navigateByUrl(url);
+  }
+
+  openDialog(message?: string) {
+    this.dialog.open(ModalComponent, {
+      data: {
+        message,
+      },
+    });
   }
 }
