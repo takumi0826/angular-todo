@@ -8,12 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EditComponent } from './edit/edit.component';
 import { HeaderComponent } from './header/header.component';
+import { InputComponent } from './in-out/input/input.component';
+import { OutputComponent } from './in-out/output/output.component';
 import { MaterialModule } from './material/material.module';
 import { ModalComponent } from './modal/modal.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { TodoComponent } from './todo/todo.component';
+import { ParentComponent } from './in-out/parent/parent.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { TodoComponent } from './todo/todo.component';
     SidenavComponent,
     SideMenuComponent,
     ProfileComponent,
+    InputComponent,
+    OutputComponent,
+    ParentComponent,
   ],
   imports: [
     BrowserModule,
