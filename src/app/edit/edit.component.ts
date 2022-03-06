@@ -46,7 +46,7 @@ export class EditComponent implements OnInit {
     }
     this.taskService.updateTask(task).subscribe(
       (res) => {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/todo');
       },
       (error) => {
         console.log(error);

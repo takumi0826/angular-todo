@@ -9,7 +9,7 @@ import { SideMenu } from '../type/response/type';
 })
 export class SideMenuComponent implements OnInit {
   menu: SideMenu[] = [
-    { name: 'Todo', link: '/' },
+    { name: 'Todo', link: 'todo' },
     { name: 'Profile', link: 'profile' },
   ];
 

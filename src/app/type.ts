@@ -15,3 +15,7 @@ export type Login = {
 export type DialogData = {
   message: string;
 };
+
+export type JwtToken = {
+  access_token: string;
+};
