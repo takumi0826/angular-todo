@@ -14,3 +14,9 @@ export type User = {
   mailAddress: string;
   password: string;
 };
+
+export type CreateUser = {
+  name: string;
+  mailAddress: string;
+  password: string;
+};

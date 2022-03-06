@@ -1,7 +1,14 @@
 <mat-card class="example-card">
-  <mat-card-title>ログイン</mat-card-title>
-  <mat-card-subtitle>login</mat-card-subtitle>
+  <mat-card-title>新規登録</mat-card-title>
+  <mat-card-subtitle>create</mat-card-subtitle>
   <mat-card-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your name</mat-label>
+      <input matInput placeholder="名前" [formControl]="name" />
+      <mat-error *ngIf="name.invalid">{{
+        getErrorNameMessage()
+      }}</mat-error> </mat-form-field
+    ><br />
     <mat-form-field appearance="fill">
       <mat-label>Enter your email</mat-label>
       <input matInput placeholder="pat@example.com" [formControl]="email" />
@@ -31,10 +38,10 @@
     ><br />
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="login()">
+    <button mat-raised-button color="primary" (click)="routerLink('/login')">
       ログイン
     </button>
-    <button mat-raised-button color="accent" (click)="routerLink('/create')">
+    <button mat-raised-button color="accent" (click)="create()">
       新規登録
     </button>
   </mat-card-actions>

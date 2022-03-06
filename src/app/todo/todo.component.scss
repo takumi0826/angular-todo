@@ -1,13 +1,6 @@
 .task {
-  &__body {
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__block {
-    padding: 24px;
+  &__block + &__block {
+    margin-top: 24px;
   }
 
   &__head {

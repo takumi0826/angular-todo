@@ -3,15 +3,15 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
-import { UserInfo } from '../type';
-import { User } from '../type/response/type';
+import { CreateUser, User } from '../type/response/type';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: 'app-create-user',
+  templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class CreateUserComponent implements OnInit {
+  name = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [
     Validators.required,
@@ -22,6 +22,10 @@ export class AuthComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  getErrorNameMessage() {
+    return this.email.hasError('required') ? '名前は必須です' : '';
+  }
 
   getErrorMailMessage() {
     if (this.email.hasError('required')) {
@@ -41,15 +45,15 @@ export class AuthComponent implements OnInit {
     return this.password.hasError('minlength') ? '最小は4文字です' : '';
   }
 
-  login() {
-    const user: User = {
+  create() {
+    const user: CreateUser = {
+      name: this.name.value,
       mailAddress: this.email.value,
       password: this.password.value,
     };
-    this.auth.login(user).subscribe(
+    this.auth.create(user).subscribe(
       (val) => {
-        localStorage.setItem('access_token', val.access_token);
-        this.router.navigateByUrl('/todo');
+        this.router.navigateByUrl('/login');
         console.log(val);
       },
       (error) => {
