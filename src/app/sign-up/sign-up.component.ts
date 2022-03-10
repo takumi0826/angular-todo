@@ -6,11 +6,11 @@ import { AuthService } from '../auth.service';
 import { CreateUser, User } from '../type/response/type';
 
 @Component({
-  selector: 'app-create-user',
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./create-user.component.scss'],
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.scss'],
 })
-export class CreateUserComponent implements OnInit {
+export class SignUpComponent implements OnInit {
   name = new FormControl('', [Validators.required, Validators.maxLength(20)]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [
@@ -45,13 +45,13 @@ export class CreateUserComponent implements OnInit {
     return this.password.hasError('minlength') ? '最小は4文字です' : '';
   }
 
-  create() {
+  signUp() {
     const user: CreateUser = {
       name: this.name.value,
       mailAddress: this.email.value,
       password: this.password.value,
     };
-    this.auth.create(user).subscribe(
+    this.auth.signUp(user).subscribe(
       (val) => {
         this.router.navigateByUrl('/login');
         console.log(val);

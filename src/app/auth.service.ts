@@ -20,13 +20,13 @@ export class AuthService {
   };
   constructor(private http: HttpClient) {}
 
-  public login(user: User): Observable<JwtToken> {
-    const url = `${this.host}/login`;
+  public signIn(user: User): Observable<JwtToken> {
+    const url = `${this.host}/sign-in`;
     return this.http.post<JwtToken>(url, user, <Object>this.httpOptions);
   }
 
-  public create(user: CreateUser): Observable<User> {
-    const url = `${this.host}/create`;
+  public signUp(user: CreateUser): Observable<User> {
+    const url = `${this.host}/sign-up`;
     return this.http.post<User>(url, user, <Object>this.httpOptions);
   }
 

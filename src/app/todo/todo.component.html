@@ -1,7 +1,7 @@
 <div class="task">
   <mat-card class="task__block">
-    <mat-card-title>Actions Buttons</mat-card-title>
-    <mat-card-subtitle>End</mat-card-subtitle>
+    <mat-card-title>Todo</mat-card-title>
+    <mat-card-subtitle>Task</mat-card-subtitle>
     <mat-card-content>
       <div class="task__inputWrap">
         <mat-form-field class="example-form-field" appearance="fill">
@@ -61,7 +61,7 @@
   </mat-card>
   <mat-card class="task__block">
     <mat-card-title>完了タスク</mat-card-title>
-    <mat-card-subtitle>End</mat-card-subtitle>
+    <mat-card-subtitle>Complete</mat-card-subtitle>
     <mat-card-content>
       <mat-list class="task__list" role="list" *ngIf="completeTask != null">
         <mat-list-item role="listitem" *ngFor="let item of completeTask">

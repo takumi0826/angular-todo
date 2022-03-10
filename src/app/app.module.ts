@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
 import { EditComponent } from './edit/edit.component';
 import { HeaderComponent } from './header/header.component';
 import { MaterialModule } from './material/material.module';
@@ -14,8 +13,9 @@ import { ModalComponent } from './modal/modal.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { TodoComponent } from './todo/todo.component';
-import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +27,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
     SidenavComponent,
     SideMenuComponent,
     ProfileComponent,
-    AuthComponent,
-    CreateUserComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

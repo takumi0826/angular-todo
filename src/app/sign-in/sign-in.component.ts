@@ -7,11 +7,11 @@ import { UserInfo } from '../type';
 import { User } from '../type/response/type';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  selector: 'app-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss'],
 })
-export class AuthComponent implements OnInit {
+export class SignInComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [
     Validators.required,
@@ -41,14 +41,14 @@ export class AuthComponent implements OnInit {
     return this.password.hasError('minlength') ? '最小は4文字です' : '';
   }
 
-  login() {
+  signIn() {
     const user: User = {
       mailAddress: this.email.value,
       password: this.password.value,
     };
-    this.auth.login(user).subscribe(
-      (val) => {
-        localStorage.setItem('access_token', val.access_token);
+    this.auth.signIn(user).subscribe(
+      async (val) => {
+        await localStorage.setItem('access_token', val.access_token);
         this.router.navigateByUrl('/todo');
         console.log(val);
       },
