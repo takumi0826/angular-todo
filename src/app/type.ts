@@ -21,3 +21,8 @@ export type JwtToken = {
 };
 
 export type UserInfo = { userId: string; userName: string };
+
+export type UserTask = {
+  userInfo: UserInfo;
+  taskInfo: TaskInfo[];
+};

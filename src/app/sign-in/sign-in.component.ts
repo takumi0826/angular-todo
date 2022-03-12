@@ -48,9 +48,10 @@ export class SignInComponent implements OnInit {
     };
     this.auth.signIn(user).subscribe(
       async (val) => {
-        await localStorage.setItem('access_token', val.access_token);
-        this.router.navigateByUrl('/todo');
-        console.log(val);
+        localStorage.setItem('access_token', val.access_token);
+
+        //リロードされないとなぜかJWT認証されないため通常遷移
+        window.location.href = '/todo';
       },
       (error) => {
         console.log(error.error.message);

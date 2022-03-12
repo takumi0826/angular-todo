@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AuthService } from '../auth.service';
 import { TaskService } from '../task.service';
-import { TaskInfo, TaskItem } from '../type';
+import { TaskInfo, TaskItem, UserInfo } from '../type';
 import { TaskResponseDto } from '../type/response/type';
 
 @Component({
@@ -15,7 +16,11 @@ export class TodoComponent implements OnInit {
   incompleteTask: TaskInfo[] = [];
   taskTitle: string = '';
 
-  constructor(private http: TaskService, private router: Router) {}
+  constructor(
+    private http: TaskService,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getTask();
