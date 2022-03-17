@@ -51,15 +51,10 @@ export class SignUpComponent implements OnInit {
       mailAddress: this.email.value,
       password: this.password.value,
     };
-    this.auth.signUp(user).subscribe(
-      (val) => {
-        this.router.navigateByUrl('/login');
-        console.log(val);
-      },
-      (error) => {
-        console.log(error.error.message);
-      }
-    );
+    this.auth.signUp(user).subscribe((val) => {
+      this.router.navigateByUrl('/sign-in');
+      console.log(val);
+    });
   }
 
   routerLink(url: string) {

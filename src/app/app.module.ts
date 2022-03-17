@@ -16,6 +16,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { TodoComponent } from './todo/todo.component';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TodoComponent } from './todo/todo.component';
     ProfileComponent,
     SignInComponent,
     SignUpComponent,
+    SignOutComponent,
   ],
   imports: [
     BrowserModule,

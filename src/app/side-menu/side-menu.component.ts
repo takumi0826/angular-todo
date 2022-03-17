@@ -11,6 +11,8 @@ export class SideMenuComponent implements OnInit {
   menu: SideMenu[] = [
     { name: 'Todo', link: 'todo' },
     { name: 'Profile', link: 'profile' },
+    { name: 'Sign-In', link: 'sign-in' },
+    { name: 'Sign-Up', link: 'sign-up' },
   ];
 
   constructor() {}

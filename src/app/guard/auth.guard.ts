@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     const token = localStorage.getItem('access_token');
     if (!token) {
-      this.route.navigateByUrl('login');
+      this.route.navigateByUrl('sign-in');
     }
     return !!token;
   }

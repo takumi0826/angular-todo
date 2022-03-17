@@ -1,7 +1,9 @@
 import { Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { JwtToken, UserInfo } from './type';
 import { CreateUser, User } from './type/response/type';
@@ -18,7 +20,7 @@ export class AuthService {
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     }),
   };
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   public signIn(user: User): Observable<JwtToken> {
     const url = `${this.host}/sign-in`;
@@ -27,7 +29,19 @@ export class AuthService {
 
   public signUp(user: CreateUser): Observable<User> {
     const url = `${this.host}/sign-up`;
-    return this.http.post<User>(url, user, <Object>this.httpOptions);
+    return this.http.post<User>(url, user, <Object>this.httpOptions).pipe(
+      map((res: any) => {
+        if (!res.response) {
+          throw new Error('Value expected!');
+        }
+        return res.response;
+      })
+    );
+  }
+
+  public signOut(): void {
+    localStorage.removeItem('access_token');
+    this.router.navigateByUrl('/sign-in');
   }
 
   public fetchUser(): Observable<UserInfo> {
