@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
+import { LoadingService } from '../loading.service';
 import { UserInfo } from '../type';
 import { User } from '../type/response/type';
 
@@ -19,7 +20,11 @@ export class SignInComponent implements OnInit {
   ]);
 
   hide = true;
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private load: LoadingService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -42,24 +47,35 @@ export class SignInComponent implements OnInit {
   }
 
   signIn() {
+    this.loadingStart();
     const user: User = {
       mailAddress: this.email.value,
       password: this.password.value,
     };
     this.auth.signIn(user).subscribe(
-      async (val) => {
+      (val) => {
         localStorage.setItem('access_token', val.access_token);
+        this.load.stop();
 
         //リロードされないとなぜかJWT認証されないため通常遷移
         window.location.href = '/todo';
       },
       (error) => {
         console.log(error.error.message);
+        this.load.stop();
       }
     );
   }
 
   routerLink(url: string) {
     this.router.navigateByUrl(url);
+  }
+
+  loadingStart() {
+    this.load.start();
+  }
+
+  loadingStop() {
+    this.load.stop();
   }
 }

@@ -8,6 +8,7 @@
           <mat-label>タスクの入力</mat-label>
           <input
             matInput
+            autocomplete="off"
             type="text"
             [(ngModel)]="taskTitle"
             (keyup.enter)="addTask(taskTitle)"

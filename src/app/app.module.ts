@@ -17,6 +17,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { TodoComponent } from './todo/todo.component';
 import { SignOutComponent } from './sign-out/sign-out.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SignOutComponent } from './sign-out/sign-out.component';
     SignInComponent,
     SignUpComponent,
     SignOutComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

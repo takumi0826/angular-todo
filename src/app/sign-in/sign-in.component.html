@@ -4,7 +4,12 @@
   <mat-card-content>
     <mat-form-field appearance="fill">
       <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" [formControl]="email" />
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControl]="email"
+        autocomplete="off"
+      />
       <mat-error *ngIf="email.invalid">{{
         getErrorMailMessage()
       }}</mat-error> </mat-form-field
@@ -27,8 +32,8 @@
       </button>
       <mat-error *ngIf="password.invalid">{{
         getErrorPassMessage()
-      }}</mat-error> </mat-form-field
-    ><br />
+      }}</mat-error>
+    </mat-form-field>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="signIn()">
