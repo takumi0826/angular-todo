@@ -9,5 +9,5 @@ import { LoadingService } from '../../services/loading.service';
   styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent{
-  constructor() {}
+  constructor(public load: LoadingService) {}
 }
