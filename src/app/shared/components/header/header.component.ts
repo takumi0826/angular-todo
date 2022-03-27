@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-header',
@@ -7,15 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  username?: string;
+  username?: string
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.username = 'aaa';
+    this.username = 'aaa'
   }
 
   routerLink(url: string) {
-    this.router.navigateByUrl(url);
+    this.router.navigateByUrl(url)
   }
 }

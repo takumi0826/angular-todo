@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TaskInfo } from 'src/app/type/type';
-import { AuthService } from '../../services/auth.service';
-import { TaskService } from '../../services/task.service';
-
-
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { TaskInfo } from 'src/app/type/type'
+import { AuthService } from '../../services/auth.service'
+import { TaskService } from '../../services/task.service'
 
 @Component({
   selector: 'app-todo',
@@ -12,9 +10,9 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
-  completeTask: TaskInfo[] = [];
-  incompleteTask: TaskInfo[] = [];
-  taskTitle: string = '';
+  completeTask: TaskInfo[] = []
+  incompleteTask: TaskInfo[] = []
+  taskTitle: string = ''
 
   constructor(
     private http: TaskService,
@@ -23,44 +21,44 @@ export class TodoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getTask();
+    this.getTask()
   }
 
   getTask(): void {
     this.http.getTask().subscribe((res) => {
-      this.completeTask = res.filter((v) => v.isDone);
-      this.incompleteTask = res.filter((v) => !v.isDone);
-    });
+      this.completeTask = res.filter((v) => v.isDone)
+      this.incompleteTask = res.filter((v) => !v.isDone)
+    })
   }
 
   addTask(title: string): void {
-    if (!title.trim()) return;
+    if (!title.trim()) return
     const param = {
       title,
       content: '',
       isDone: false,
-    };
+    }
     this.http.createTask(param).subscribe((res) => {
-      this.taskTitle = '';
-      this.getTask();
-    });
+      this.taskTitle = ''
+      this.getTask()
+    })
   }
 
   updateTask(): void {}
 
   deleteTask(id: number): void {
     this.http.deleteTask(id).subscribe((res) => {
-      this.getTask();
-    });
+      this.getTask()
+    })
   }
 
   doneTask(id: number, isDone: boolean) {
     this.http.doneTask(id, isDone).subscribe((res) => {
-      this.getTask();
-    });
+      this.getTask()
+    })
   }
 
   routeLink(url: string) {
-    this.router.navigateByUrl(url);
+    this.router.navigateByUrl(url)
   }
 }

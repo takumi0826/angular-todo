@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TaskInfo } from 'src/app/type/type';
+import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
+import { ActivatedRoute, Router } from '@angular/router'
+import { TaskInfo } from 'src/app/type/type'
 
-import { ModalComponent } from '../modal/modal.component';
-import { TaskService } from '../../services/task.service';
+import { ModalComponent } from '../modal/modal.component'
+import { TaskService } from '../../services/task.service'
 
 @Component({
   selector: 'app-edit',
@@ -12,13 +12,13 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit {
-  routeId: number = 0;
+  routeId: number = 0
   taskInfo: TaskInfo = {
     id: 0,
     title: '',
     content: undefined,
     isDone: false,
-  };
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -28,34 +28,34 @@ export class EditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getHero();
+    this.getHero()
   }
 
   getHero(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.routeId = id;
+    const id = Number(this.route.snapshot.paramMap.get('id'))
+    this.routeId = id
     this.taskService.getOneTask(id).subscribe((res) => {
-      this.taskInfo = res;
-    });
+      this.taskInfo = res
+    })
   }
 
   edit(task: TaskInfo) {
     if (!task.title.trim()) {
-      this.openDialog('こっちから渡してみる');
-      return;
+      this.openDialog('こっちから渡してみる')
+      return
     }
     this.taskService.updateTask(task).subscribe(
       (res) => {
-        this.router.navigateByUrl('/todo');
+        this.router.navigateByUrl('/todo')
       },
       (error) => {
-        console.log(error);
+        console.log(error)
       }
-    );
+    )
   }
 
   routeLink(url: string) {
-    this.router.navigateByUrl(url);
+    this.router.navigateByUrl(url)
   }
 
   openDialog(message?: string) {
@@ -63,6 +63,6 @@ export class EditComponent implements OnInit {
       data: {
         message,
       },
-    });
+    })
   }
 }

@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadingService {
-  isShow = false;
+  isShow = false
 
   constructor() {}
 
   start() {
-    this.isShow = true;
-    console.log(`isShow: ${this.isShow}`);
+    this.isShow = true
+    console.log(`isShow: ${this.isShow}`)
   }
 
   stop() {
-    this.isShow = false;
+    this.isShow = false
   }
 }

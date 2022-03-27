@@ -1,51 +1,51 @@
 export type TaskResponseDto = {
-  id: number;
-  title: string;
-  content: string;
-  isDone: boolean;
-};
+  id: number
+  title: string
+  content: string
+  isDone: boolean
+}
 
 export type SideMenu = {
-  name: string;
-  link: string;
-};
+  name: string
+  link: string
+}
 
 export type User = {
-  mailAddress: string;
-  password: string;
-};
+  mailAddress: string
+  password: string
+}
 
 export type CreateUser = {
-  name: string;
-  mailAddress: string;
-  password: string;
-};
+  name: string
+  mailAddress: string
+  password: string
+}
 
 export type TaskInfo = {
-  id: number;
-  title: string;
-  content?: string;
-  isDone: boolean;
-};
+  id: number
+  title: string
+  content?: string
+  isDone: boolean
+}
 
-export type TaskItem = Pick<TaskInfo, 'title' | 'isDone'>;
+export type TaskItem = Pick<TaskInfo, 'title' | 'isDone'>
 
 export type Login = {
-  userId: string;
-  password: string;
-};
+  userId: string
+  password: string
+}
 
 export type DialogData = {
-  message: string;
-};
+  message: string
+}
 
 export type JwtToken = {
-  access_token: string;
-};
+  access_token: string
+}
 
-export type UserInfo = { userId: string; userName: string };
+export type UserInfo = { userId: string; userName: string }
 
 export type UserTask = {
-  userInfo: UserInfo;
-  taskInfo: TaskInfo[];
-};
+  userInfo: UserInfo
+  taskInfo: TaskInfo[]
+}

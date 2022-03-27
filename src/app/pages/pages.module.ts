@@ -1,23 +1,30 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EditComponent } from './components/edit/edit.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { SignInComponent } from './components/sign-in/sign-in.component';
-import { SignOutComponent } from './components/sign-out/sign-out.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { TodoComponent } from './components/todo/todo.component';
-import { MaterialModule } from '../material/material.module';
-import { CoreModule } from '../core/core.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { ModalComponent } from './components/modal/modal.component';
-import { MyCounterComponent } from './my-counter/my-counter.component';
-
-
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { EditComponent } from './components/edit/edit.component'
+import { ProfileComponent } from './components/profile/profile.component'
+import { SignInComponent } from './components/sign-in/sign-in.component'
+import { SignOutComponent } from './components/sign-out/sign-out.component'
+import { SignUpComponent } from './components/sign-up/sign-up.component'
+import { TodoComponent } from './components/todo/todo.component'
+import { MaterialModule } from '../material/material.module'
+import { CoreModule } from '../core/core.module'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+import { RouterModule } from '@angular/router'
+import { ModalComponent } from './components/modal/modal.component'
+import { MyCounterComponent } from './my-counter/my-counter.component'
 
 @NgModule({
-  declarations: [EditComponent,ProfileComponent,SignInComponent,SignOutComponent,SignUpComponent,TodoComponent,ModalComponent, MyCounterComponent],
+  declarations: [
+    EditComponent,
+    ProfileComponent,
+    SignInComponent,
+    SignOutComponent,
+    SignUpComponent,
+    TodoComponent,
+    ModalComponent,
+    MyCounterComponent,
+  ],
   imports: [
     CommonModule,
     MaterialModule,
@@ -25,7 +32,17 @@ import { MyCounterComponent } from './my-counter/my-counter.component';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
-  ],exports: [EditComponent,ProfileComponent,SignInComponent,SignOutComponent,SignUpComponent,TodoComponent,ModalComponent,MyCounterComponent]
+    RouterModule,
+  ],
+  exports: [
+    EditComponent,
+    ProfileComponent,
+    SignInComponent,
+    SignOutComponent,
+    SignUpComponent,
+    TodoComponent,
+    ModalComponent,
+    MyCounterComponent,
+  ],
 })
-export class PagesModule { }
+export class PagesModule {}

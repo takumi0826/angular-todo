@@ -1,11 +1,14 @@
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs'
 
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
-    ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree
-} from '@angular/router';
-import { AuthService } from '../pages/services/auth.service';
-
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router'
+import { AuthService } from '../pages/services/auth.service'
 
 @Injectable({
   providedIn: 'root',
@@ -20,10 +23,10 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token')
     if (!token) {
-      this.route.navigateByUrl('sign-in');
+      this.route.navigateByUrl('sign-in')
     }
-    return !!token;
+    return !!token
   }
 }
