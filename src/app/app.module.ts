@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
+import { counterReducer } from './counter.reducer';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { PagesModule } from './pages/pages.module';
     CoreModule,
     SharedModule,
     PagesModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ count: counterReducer }, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],

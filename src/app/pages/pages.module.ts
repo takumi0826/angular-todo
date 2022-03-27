@@ -12,11 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ModalComponent } from './components/modal/modal.component';
+import { MyCounterComponent } from './my-counter/my-counter.component';
 
 
 
 @NgModule({
-  declarations: [EditComponent,ProfileComponent,SignInComponent,SignOutComponent,SignUpComponent,TodoComponent,ModalComponent],
+  declarations: [EditComponent,ProfileComponent,SignInComponent,SignOutComponent,SignUpComponent,TodoComponent,ModalComponent, MyCounterComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -25,6 +26,6 @@ import { ModalComponent } from './components/modal/modal.component';
     FormsModule,
     HttpClientModule,
     RouterModule
-  ],exports: [EditComponent,ProfileComponent,SignInComponent,SignOutComponent,SignUpComponent,TodoComponent,ModalComponent]
+  ],exports: [EditComponent,ProfileComponent,SignInComponent,SignOutComponent,SignUpComponent,TodoComponent,ModalComponent,MyCounterComponent]
 })
 export class PagesModule { }
