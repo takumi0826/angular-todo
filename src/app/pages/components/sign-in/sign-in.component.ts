@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
+import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs'
 import { LoadingService } from 'src/app/core/services/loading.service'
+import { update } from 'src/app/state/user.actions'
 
-import { User } from '../../../type/type'
+import { User, UserInfo } from '../../../type/type'
 import { AuthService } from '../../services/auth.service'
 
 @Component({
@@ -14,12 +17,13 @@ import { AuthService } from '../../services/auth.service'
 export class SignInComponent {
   email = new FormControl('', [Validators.required, Validators.email])
   password = new FormControl('', [Validators.required, Validators.minLength(4)])
-
   hide = true
+
   constructor(
     private auth: AuthService,
     private router: Router,
-    private load: LoadingService
+    private load: LoadingService,
+    private store: Store<{ user: UserInfo }>,
   ) {}
 
   getErrorMailMessage() {
@@ -50,11 +54,16 @@ export class SignInComponent {
       (res) => {
         localStorage.setItem('access_token', res.access_token)
         //リロードされないとなぜかJWT認証されないため通常遷移
-        window.location.href = '/todo'
+        // window.location.href = '/todo'
         this.load.stop()
+        // this.router.navigateByUrl('/todo')
       },
       (err) => {
         this.load.stop()
+      },()=> {
+        this.auth.fetchUser().subscribe(v => {
+          this.store.dispatch(update(v));
+        })
       }
     )
   }

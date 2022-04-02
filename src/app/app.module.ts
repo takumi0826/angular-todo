@@ -9,7 +9,9 @@ import { StoreModule } from '@ngrx/store'
 import { CoreModule } from './core/core.module'
 import { SharedModule } from './shared/shared.module'
 import { PagesModule } from './pages/pages.module'
-import { counterReducer } from './counter.reducer'
+import { counterReducer } from './state/counter.reducer'
+import { userReducer } from './state/user.reducer'
+import { taskReducer } from './state/task.reducer'
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,7 @@ import { counterReducer } from './counter.reducer'
     CoreModule,
     SharedModule,
     PagesModule,
-    StoreModule.forRoot({ count: counterReducer }, {}),
+    StoreModule.forRoot({ count: counterReducer ,user: userReducer, task: taskReducer}),
   ],
   providers: [],
   bootstrap: [AppComponent],

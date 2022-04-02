@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { User, JwtToken, CreateUser, UserInfo } from 'src/app/type/type'
+import { Store } from '@ngrx/store'
+import { clear } from 'src/app/state/user.actions'
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ export class AuthService {
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     }),
   }
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router,private store: Store<{ user: UserInfo }>,) {}
 
   public signIn(user: User): Observable<JwtToken> {
     const url = `${this.host}/sign-in`
@@ -40,6 +42,7 @@ export class AuthService {
 
   public signOut(): void {
     localStorage.removeItem('access_token')
+this.store.dispatch(clear())
     this.router.navigateByUrl('/sign-in')
   }
 

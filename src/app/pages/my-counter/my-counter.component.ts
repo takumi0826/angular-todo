@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import { increment, decrement, reset, init } from 'src/app/counter.actions'
+import { increment, decrement, reset, init } from 'src/app/state/counter.actions'
 import { TaskService } from '../services/task.service'
 
 @Component({
