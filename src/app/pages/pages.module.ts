@@ -12,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { RouterModule } from '@angular/router'
 import { ModalComponent } from './components/modal/modal.component'
-import { MyCounterComponent } from './my-counter/my-counter.component'
+import { MyCounterComponent } from './my-counter/my-counter.component';
+import { RxjsTestComponent } from './components/rxjs-test/rxjs-test.component'
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MyCounterComponent } from './my-counter/my-counter.component'
     TodoComponent,
     ModalComponent,
     MyCounterComponent,
+    RxjsTestComponent,
   ],
   imports: [
     CommonModule,
