@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
+import { finalize, take } from 'rxjs/operators'
 import { LoadingService } from 'src/app/core/services/loading.service'
 import { update } from 'src/app/state/user.actions'
 
@@ -22,8 +23,7 @@ export class SignInComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private load: LoadingService,
-    private store: Store<{ user: UserInfo }>,
+    private store: Store<{ user: UserInfo }>
   ) {}
 
   getErrorMailMessage() {
@@ -45,7 +45,6 @@ export class SignInComponent {
   }
 
   signIn() {
-    this.load.start()
     const user: User = {
       mailAddress: this.email.value,
       password: this.password.value,
@@ -53,17 +52,14 @@ export class SignInComponent {
     this.auth.signIn(user).subscribe(
       (res) => {
         localStorage.setItem('access_token', res.access_token)
+
+        this.auth.fetchUser().subscribe((v) => {
+          this.store.dispatch(update(v))
+        })
+
         //リロードされないとなぜかJWT認証されないため通常遷移
         // window.location.href = '/todo'
-        this.load.stop()
-        // this.router.navigateByUrl('/todo')
-      },
-      (err) => {
-        this.load.stop()
-      },()=> {
-        this.auth.fetchUser().subscribe(v => {
-          this.store.dispatch(update(v));
-        })
+        this.router.navigateByUrl('/todo')
       }
     )
   }
