@@ -1,12 +1,12 @@
-import { EMPTY, Observable, of, throwError } from 'rxjs'
-import { catchError, finalize, map, take, tap } from 'rxjs/operators'
+import { EMPTY, Observable, of, pipe, throwError } from 'rxjs'
+import { catchError, concatMap, finalize, map, mergeMap, take, tap } from 'rxjs/operators'
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { User, JwtToken, CreateUser, UserInfo } from 'src/app/type/type'
 import { Store } from '@ngrx/store'
-import { clear } from 'src/app/state/user.actions'
+import { clear, update } from 'src/app/state/user.actions'
 import { LoadingService } from 'src/app/core/services/loading.service'
 
 @Injectable({
