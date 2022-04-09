@@ -1,9 +1,10 @@
+
+<app-header [user]="(user$ | async)!"></app-header>
 <mat-drawer-container class="app">
   <mat-drawer mode="side" opened>
     <app-side-menu></app-side-menu>
   </mat-drawer>
   <mat-drawer-content>
-    <app-header></app-header>
     <main class="main">
       <router-outlet></router-outlet>
     </main>
