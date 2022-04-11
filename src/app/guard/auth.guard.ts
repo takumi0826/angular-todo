@@ -9,12 +9,19 @@ import {
   UrlTree,
 } from '@angular/router'
 import { AuthService } from '../services/auth.service'
+import { UserInfo } from '../model/type'
+import { Store } from '@ngrx/store'
+import { update } from '../store/auth/auth.actions'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private route: Router) {}
+  constructor(
+    private auth: AuthService,
+    private route: Router,
+    private authStore: Store<{ auth: boolean }>
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,10 +30,9 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const token = localStorage.getItem('access_token')
-    if (!token) {
-      this.route.navigateByUrl('sign-in')
-    }
-    return !!token
+    let isLogin = false;
+    this.authStore.select('auth').subscribe(res => isLogin = res)
+
+    return isLogin
   }
 }

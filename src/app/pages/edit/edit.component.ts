@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute, Router } from '@angular/router'
+import { Url } from 'src/app/constant/url-const'
 import { ModalComponent } from 'src/app/modal/error/modal.component'
 import { TaskInfo } from 'src/app/model/type'
 
@@ -41,28 +42,14 @@ export class EditComponent implements OnInit {
 
   edit(task: TaskInfo) {
     if (!task.title.trim()) {
-      this.openDialog('こっちから渡してみる')
       return
     }
-    this.taskService.updateTask(task).subscribe(
-      (res) => {
-        this.router.navigateByUrl('/todo')
-      },
-      (error) => {
-        console.log(error)
-      }
-    )
-  }
-
-  routeLink(url: string) {
-    this.router.navigateByUrl(url)
-  }
-
-  openDialog(message?: string) {
-    this.dialog.open(ModalComponent, {
-      data: {
-        message,
-      },
+    this.taskService.updateTask(task).subscribe((res) => {
+      this.router.navigateByUrl(Url.TODO)
     })
+  }
+
+  goTodo() {
+    this.router.navigateByUrl(Url.TODO)
   }
 }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router'
 import { AuthService } from 'src/app/services/auth.service'
 import { TaskService } from 'src/app/services/task.service'
 import { TaskInfo } from 'src/app/model/type'
+import { Store } from '@ngrx/store'
+import { update } from 'src/app/store/task/task.actions'
 
 
 @Component({
@@ -18,17 +20,24 @@ export class TodoComponent implements OnInit {
   constructor(
     private http: TaskService,
     private router: Router,
-    private auth: AuthService
-  ) {}
+    private auth: AuthService,
+    private store: Store<{task: TaskInfo[]}>
+  ) {
+    this.store.select('task').subscribe(task => {
+      this.completeTask = task.filter((v) => v.isDone)
+      this.incompleteTask = task.filter((v) => !v.isDone)
+    })
+  }
 
   ngOnInit(): void {
-    this.getTask()
+
   }
 
   getTask(): void {
-    this.http.getTask().subscribe((res) => {
-      this.completeTask = res.filter((v) => v.isDone)
-      this.incompleteTask = res.filter((v) => !v.isDone)
+    this.http.getTask().subscribe((task) => {
+      this.completeTask = task.filter((v) => v.isDone)
+      this.incompleteTask = task.filter((v) => !v.isDone)
+      this.store.dispatch(update({task}))
     })
   }
 

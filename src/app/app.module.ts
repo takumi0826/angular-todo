@@ -24,6 +24,7 @@ import { SideMenuComponent } from './parts/side-menu/side-menu.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { AlertDirective } from './directive/alert.directive'
+import { AuthModule } from './store/auth/auth.module'
 
 @NgModule({
   declarations: [
@@ -46,11 +47,12 @@ import { AlertDirective } from './directive/alert.directive'
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    TaskModule,
-    UserModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TaskModule,
+    UserModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent],

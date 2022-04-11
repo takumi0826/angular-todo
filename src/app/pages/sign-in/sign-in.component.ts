@@ -7,7 +7,7 @@ import { finalize, take } from 'rxjs/operators'
 import { ErrorMessage } from 'src/app/constant/error-massage-const'
 import { Url } from 'src/app/constant/url-const'
 import { AuthService } from 'src/app/services/auth.service'
-import { update } from 'src/app/store/user/user.actions'
+import { update } from 'src/app/store/auth/auth.actions'
 import { User, UserInfo } from 'src/app/model/type'
 
 @Component({
@@ -23,7 +23,8 @@ export class SignInComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private store: Store<{ user: UserInfo }>
+    private userStore: Store<{ user: UserInfo }>,
+    private authStore: Store<{ auth: boolean }>
   ) {}
 
   getErrorMailMessage() {
@@ -31,9 +32,7 @@ export class SignInComponent {
       return ErrorMessage.REQUIRED_EMAIL
     }
 
-    return this.email.hasError('email')
-      ? ErrorMessage.FORMAT_EMAIL
-      : ''
+    return this.email.hasError('email') ? ErrorMessage.FORMAT_EMAIL : ''
   }
 
   getErrorPassMessage() {
@@ -41,7 +40,9 @@ export class SignInComponent {
       return ErrorMessage.REQUIRED_PASSWORD
     }
 
-    return this.password.hasError('minlength') ? ErrorMessage.MIN_LENGTH.template(4) : ''
+    return this.password.hasError('minlength')
+      ? ErrorMessage.MIN_LENGTH.template(4)
+      : ''
   }
 
   signIn() {
@@ -51,10 +52,9 @@ export class SignInComponent {
     }
     this.auth.signIn(user).subscribe((res) => {
       localStorage.setItem('access_token', res.access_token)
-
       //リロードされないとなぜかJWT認証されないため通常遷移
-      // window.location.href = '/todo'
-      this.router.navigateByUrl(Url.TODO)
+      window.location.href = Url.TODO
+      // this.router.navigateByUrl(Url.TODO)
     })
   }
 

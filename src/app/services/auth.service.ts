@@ -15,6 +15,10 @@ import { Router } from '@angular/router'
 import { User, JwtToken, CreateUser, UserInfo } from 'src/app/model/type'
 import { Store } from '@ngrx/store'
 import { clear, update } from 'src/app/store/user/user.actions'
+import {
+  clear as authClear,
+  update as authUpdate,
+} from 'src/app/store/auth/auth.actions'
 import { LoadingService } from './loading.service'
 
 @Injectable({
@@ -32,28 +36,28 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private store: Store<{ user: UserInfo }>,
+    private userStore: Store<{ user: UserInfo }>,
+    private authStore: Store<{ auth: boolean }>,
     private load: LoadingService
   ) {}
 
   public signIn(user: User): Observable<JwtToken> {
     this.load.start()
     const url = `${this.host}/sign-in`
-    const token = this.http
-      .post<JwtToken>(url, user, <Object>this.httpOptions)
-      .pipe(
-        take(1),
-        tap((_) => this.fetchUser().subscribe()),
-        catchError((e) => {
-          console.log(`エラーメッセージ: ${e.error.message}`)
-          return EMPTY
-        }),
-        finalize(() => {
-          console.log('処理終了')
-          this.load.stop()
-        })
-      )
-    return token
+    const token$ = this.http.post<JwtToken>(url, user, <Object>this.httpOptions)
+    const user$ = this.fetchUser()
+    token$.pipe(
+      concatMap((_) => user$),
+      catchError((e) => {
+        console.log(`sign-in: ${e.error.message}`)
+        return EMPTY
+      }),
+      finalize(() => {
+        console.log('処理終了')
+        this.load.stop()
+      })
+    )
+    return token$
   }
 
   public signUp(user: CreateUser): Observable<User> {
@@ -74,20 +78,18 @@ export class AuthService {
 
   public signOut(): void {
     localStorage.removeItem('access_token')
-    this.store.dispatch(clear())
+    this.userStore.dispatch(clear())
+    this.authStore.dispatch(authClear())
     this.router.navigateByUrl('/sign-in')
   }
 
   public fetchUser(): Observable<UserInfo> {
     const url = `${this.host}/profile`
     return this.http.get<UserInfo>(url, <Object>this.httpOptions).pipe(
-      take(1),
-      tap((user) => {
-        console.log(`fetchUser`)
-        this.store.dispatch(update({ user }))
-      }),
       catchError((e) => {
-        console.log(`エラーメッセージ: ${e.error.message}`)
+        console.log(`fetch: ${e.error.message}`)
+        this.userStore.dispatch(clear())
+        this.authStore.dispatch(authClear())
         return EMPTY
       }),
       finalize(() => {
