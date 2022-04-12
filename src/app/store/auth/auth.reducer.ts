@@ -6,7 +6,7 @@ export const initialState: boolean = false
 const _authReducer = createReducer(
   initialState,
   on(update, (state, payload) => payload.isLogin),
-  on(clear, (state) => initialState)
+  on(clear, (state) => false)
 )
 
 export function authReducer(state: boolean, action: Action) {

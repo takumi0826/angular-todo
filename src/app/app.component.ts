@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { UserInfo } from './model/type'
 import { AuthService } from './services/auth.service'
 import { update } from './store/user/user.actions'
@@ -13,8 +13,8 @@ import { update as authUpdate } from './store/auth/auth.actions'
 })
 export class AppComponent {
   title = 'angular-todo'
-  user$ = this.userStore.select('user')
-  auth$ = this.authStore.select('auth')
+  user$ = this.userStore.pipe(select('user'))
+  auth$ = this.authStore.pipe(select('auth'))
   constructor(
     private router: Router,
     private userStore: Store<{ user: UserInfo }>,

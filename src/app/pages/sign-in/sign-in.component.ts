@@ -7,7 +7,7 @@ import { finalize, take } from 'rxjs/operators'
 import { ErrorMessage } from 'src/app/constant/error-massage-const'
 import { Url } from 'src/app/constant/url-const'
 import { AuthService } from 'src/app/services/auth.service'
-import { update } from 'src/app/store/auth/auth.actions'
+import { update as authUpdate } from 'src/app/store/auth/auth.actions'
 import { User, UserInfo } from 'src/app/model/type'
 
 @Component({
@@ -51,10 +51,14 @@ export class SignInComponent {
       password: this.password.value,
     }
     this.auth.signIn(user).subscribe((res) => {
+      console.log('component');
       localStorage.setItem('access_token', res.access_token)
+      this.auth.fetchUser().subscribe(user => {
+        this.authStore.dispatch(authUpdate({isLogin: true}))
+      })
       //リロードされないとなぜかJWT認証されないため通常遷移
-      window.location.href = Url.TODO
-      // this.router.navigateByUrl(Url.TODO)
+      // window.location.href = Url.TODO
+      this.router.navigateByUrl(Url.TODO)
     })
   }
 

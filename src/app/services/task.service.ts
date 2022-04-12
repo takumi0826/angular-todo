@@ -29,7 +29,7 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('createTask:処理終了')
       })
     )
   }
@@ -42,7 +42,7 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('getTask:処理終了')
       })
     )
   }
@@ -55,7 +55,7 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('updateTask:処理終了')
       })
     )
   }
@@ -68,7 +68,7 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('deleteTask:処理終了')
       })
     )
   }
@@ -81,7 +81,7 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('getOneTask:処理終了')
       })
     )
   }
@@ -96,7 +96,7 @@ export class TaskService {
           return EMPTY
         }),
         finalize(() => {
-          console.log('処理終了')
+          console.log('doneTask:処理終了')
         })
       )
   }

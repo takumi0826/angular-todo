@@ -10,7 +10,7 @@ import {
 } from '@angular/router'
 import { AuthService } from '../services/auth.service'
 import { UserInfo } from '../model/type'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { update } from '../store/auth/auth.actions'
 
 @Injectable({
@@ -30,9 +30,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let isLogin = false;
-    this.authStore.select('auth').subscribe(res => isLogin = res)
-
-    return isLogin
+    const auth$ = this.authStore.pipe(select('auth'))
+    return auth$
   }
 }

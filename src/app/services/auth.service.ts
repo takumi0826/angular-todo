@@ -44,20 +44,16 @@ export class AuthService {
   public signIn(user: User): Observable<JwtToken> {
     this.load.start()
     const url = `${this.host}/sign-in`
-    const token$ = this.http.post<JwtToken>(url, user, <Object>this.httpOptions)
-    const user$ = this.fetchUser()
-    token$.pipe(
-      concatMap((_) => user$),
+    return this.http.post<JwtToken>(url, user, <Object>this.httpOptions).pipe(
       catchError((e) => {
         console.log(`sign-in: ${e.error.message}`)
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('sign-in:処理終了')
         this.load.stop()
       })
     )
-    return token$
   }
 
   public signUp(user: CreateUser): Observable<User> {
@@ -87,13 +83,13 @@ export class AuthService {
     const url = `${this.host}/profile`
     return this.http.get<UserInfo>(url, <Object>this.httpOptions).pipe(
       catchError((e) => {
-        console.log(`fetch: ${e.error.message}`)
+        console.log(`fetchUser: ${e.error.message}`)
         this.userStore.dispatch(clear())
         this.authStore.dispatch(authClear())
         return EMPTY
       }),
       finalize(() => {
-        console.log('処理終了')
+        console.log('fetchUser:処理終了')
       })
     )
   }

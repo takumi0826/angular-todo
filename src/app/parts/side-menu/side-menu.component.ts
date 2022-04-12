@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
+import { select, Store } from '@ngrx/store'
 import { Url } from 'src/app/constant/url-const'
 import { SideMenu } from 'src/app/model/type'
 
@@ -12,7 +12,7 @@ import { SideMenu } from 'src/app/model/type'
 })
 export class SideMenuComponent {
 
-  isLogin$ = this.authStore.select('auth')
+  isLogin$ = this.authStore.pipe(select('auth'))
 
 
   menu: SideMenu[] = [
