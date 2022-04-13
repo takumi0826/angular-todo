@@ -5,6 +5,8 @@ import { TaskService } from 'src/app/services/task.service'
 import { TaskInfo } from 'src/app/model/type'
 import { select, Store } from '@ngrx/store'
 import { update } from 'src/app/store/task/task.actions'
+import { Observable } from 'rxjs'
+import { filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-todo',
@@ -14,6 +16,7 @@ import { update } from 'src/app/store/task/task.actions'
 export class TodoComponent implements OnInit {
   completeTask: TaskInfo[] = []
   incompleteTask: TaskInfo[] = []
+  task$: Observable<TaskInfo[]> = this.store.pipe(select('task'))
   taskTitle: string = ''
 
   constructor(
@@ -58,19 +61,20 @@ export class TodoComponent implements OnInit {
 
   updateTask(): void {}
 
-  deleteTask(id: number): void {
+  onDeleteTask(id: number): void {
     this.http.deleteTask(id).subscribe((res) => {
       this.getTask()
     })
   }
 
-  doneTask(id: number, isDone: boolean) {
+  onDoneTask($event:{id: number, isDone: boolean}) {
+    const {id, isDone} = $event
     this.http.doneTask(id, isDone).subscribe((res) => {
       this.getTask()
     })
   }
 
-  routeLink(url: string) {
-    this.router.navigateByUrl(url)
+  onGoEdit(val: string) {
+    this.router.navigateByUrl(val)
   }
 }

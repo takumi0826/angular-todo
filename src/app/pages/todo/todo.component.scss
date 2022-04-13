@@ -8,39 +8,6 @@
     text-align: center;
   }
 
-  &__list {
-    margin-top: 24px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  &__listItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  &__listItem + &__listItem {
-    margin-top: 12px;
-  }
-
-  &__title {
-    font-weight: bold;
-    flex: 1;
-  }
-
-  &__buttonWrap {
-    margin-left: 12px;
-    display: flex;
-  }
-
-  &__button {
-  }
-
-  &__button + &__button {
-    margin-left: 12px;
-  }
-
   &__edit {
     text-decoration: underline;
   }

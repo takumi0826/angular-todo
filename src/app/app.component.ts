@@ -22,8 +22,8 @@ export class AppComponent {
     private auth: AuthService
   ) {
     this.auth.fetchUser().subscribe(user => {
-      this.userStore.dispatch(update({user}))
       this.authStore.dispatch(authUpdate({isLogin: true}))
+      this.userStore.dispatch(update({user}))
     })
   }
 }

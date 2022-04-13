@@ -32,64 +32,24 @@
           追加
         </button>
       </div>
-      <mat-list class="task__list" role="list" *ngIf="incompleteTask !== null">
-        <mat-list-item role="listitem" *ngFor="let item of incompleteTask">
-          <span class="task__title">{{ item.title }}</span>
-          <mat-divider></mat-divider>
-          <div class="task__buttonWrap">
-            <button
-              class="task__button"
-              mat-mini-fab
-              color="primary"
-              aria-label="Example icon button with a vertical three dot icon"
-              (click)="routeLink('/edit/' + item.id)"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <button
-              class="task__button"
-              mat-mini-fab
-              color="accent"
-              aria-label="Example icon button with a delete icon"
-              (click)="doneTask(item.id, true)"
-            >
-              <mat-icon>done</mat-icon>
-            </button>
-          </div>
-        </mat-list-item>
-      </mat-list>
+      <app-task-list
+        [tasks]="task$ | async"
+        [isCompleted]="false"
+        (goEdit)="onGoEdit($event)"
+        (doneTask)="onDoneTask($event)"
+      ></app-task-list>
     </mat-card-content>
   </mat-card>
   <mat-card class="task__block">
     <mat-card-title>完了タスク</mat-card-title>
     <mat-card-subtitle>Complete</mat-card-subtitle>
     <mat-card-content>
-      <mat-list class="task__list" role="list" *ngIf="completeTask !== null">
-        <mat-list-item role="listitem" *ngFor="let item of completeTask">
-          <span class="task__title">{{ item.title }}</span>
-          <mat-divider></mat-divider>
-          <div class="task__buttonWrap">
-            <button
-              class="task__button"
-              mat-mini-fab
-              color="basic"
-              aria-label="Example icon button with a delete icon"
-              (click)="doneTask(item.id, false)"
-            >
-              <mat-icon>keyboard_backspace</mat-icon>
-            </button>
-            <button
-              class="task__button"
-              mat-mini-fab
-              color="warn"
-              aria-label="Example icon button with a delete icon"
-              (click)="deleteTask(item.id)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </mat-list-item>
-      </mat-list>
+      <app-task-list
+        [tasks]="task$ | async"
+        [isCompleted]="true"
+        (doneTask)="onDoneTask($event)"
+        (deleteTask)="onDeleteTask($event)"
+      ></app-task-list>
     </mat-card-content>
   </mat-card>
 </div>

@@ -41,6 +41,7 @@ export type DialogData = {
 
 export type JwtToken = {
   access_token: string
+  user: UserInfo
 }
 
 export type UserInfo = { userId: string; userName: string }

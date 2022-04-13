@@ -1,0 +1,44 @@
+<mat-list-item role="listitem" class="task">
+  <span class="task__title">{{ task.title }}</span>
+  <mat-divider></mat-divider>
+  <div class="task__buttonWrap" *ngIf="!isCompleted">
+    <button
+      class="task__button"
+      mat-mini-fab
+      color="primary"
+      aria-label="Example icon button with a vertical three dot icon"
+      (click)="onGoEdit('/edit/' + task.id)"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <button
+      class="task__button"
+      mat-mini-fab
+      color="accent"
+      aria-label="Example icon button with a delete icon"
+      (click)="onDoneTask(task.id, true)"
+    >
+      <mat-icon>done</mat-icon>
+    </button>
+  </div>
+  <div class="task__buttonWrap" *ngIf="isCompleted">
+    <button
+      class="task__button"
+      mat-mini-fab
+      color="basic"
+      aria-label="Example icon button with a delete icon"
+      (click)="onDoneTask(task.id, false)"
+    >
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+    <button
+      class="task__button"
+      mat-mini-fab
+      color="warn"
+      aria-label="Example icon button with a delete icon"
+      (click)="onDeleteTask(task.id)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-list-item>

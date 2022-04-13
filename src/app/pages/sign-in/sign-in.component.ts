@@ -9,6 +9,7 @@ import { Url } from 'src/app/constant/url-const'
 import { AuthService } from 'src/app/services/auth.service'
 import { update as authUpdate } from 'src/app/store/auth/auth.actions'
 import { User, UserInfo } from 'src/app/model/type'
+import { update } from 'src/app/store/user/user.actions'
 
 @Component({
   selector: 'app-sign-in',
@@ -51,13 +52,9 @@ export class SignInComponent {
       password: this.password.value,
     }
     this.auth.signIn(user).subscribe((res) => {
-      console.log('component');
       localStorage.setItem('access_token', res.access_token)
-      this.auth.fetchUser().subscribe(user => {
-        this.authStore.dispatch(authUpdate({isLogin: true}))
-      })
-      //リロードされないとなぜかJWT認証されないため通常遷移
-      // window.location.href = Url.TODO
+      this.authStore.dispatch(authUpdate({isLogin: true}))
+      this.userStore.dispatch(update({user: res.user}))
       this.router.navigateByUrl(Url.TODO)
     })
   }

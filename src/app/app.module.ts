@@ -24,7 +24,9 @@ import { SideMenuComponent } from './parts/side-menu/side-menu.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { AlertDirective } from './directive/alert.directive'
-import { AuthModule } from './store/auth/auth.module'
+import { AuthModule } from './store/auth/auth.module';
+import { TaskListComponent } from './parts/task-list/task-list.component';
+import { TaskListItemComponent } from './parts/task-list-item/task-list-item.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { AuthModule } from './store/auth/auth.module'
     LoadingComponent,
     SideMenuComponent,
     AlertDirective,
+    TaskListComponent,
+    TaskListItemComponent,
   ],
   imports: [
     BrowserModule,
