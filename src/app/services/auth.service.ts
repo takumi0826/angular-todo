@@ -74,6 +74,7 @@ export class AuthService {
 
   public signOut(): void {
     localStorage.removeItem('access_token')
+    localStorage.setItem('isFirstFlg', '0')
     this.userStore.dispatch(clear())
     this.authStore.dispatch(authClear())
     this.router.navigateByUrl('/sign-in')
@@ -86,6 +87,7 @@ export class AuthService {
         console.log(`fetchUser: ${e.error.message}`)
         this.userStore.dispatch(clear())
         this.authStore.dispatch(authClear())
+        localStorage.setItem('isFirstFlg', '0')
         return EMPTY
       }),
       finalize(() => {

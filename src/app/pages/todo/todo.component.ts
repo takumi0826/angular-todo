@@ -16,7 +16,7 @@ import { filter } from 'rxjs/operators'
 export class TodoComponent implements OnInit {
   completeTask: TaskInfo[] = []
   incompleteTask: TaskInfo[] = []
-  task$: Observable<TaskInfo[]> = this.store.pipe(select('task'))
+  task$ = this.store.pipe(select('task'))
   taskTitle: string = ''
 
   constructor(
@@ -25,23 +25,20 @@ export class TodoComponent implements OnInit {
     private auth: AuthService,
     private store: Store<{ task: TaskInfo[] }>
   ) {
-    console.log('constructor');
-    this.getTask()
+
   }
 
   ngOnInit(): void {
-    console.log('ngOninit');
-    
-    this.store.pipe(select('task')).subscribe((task) => {
-      this.completeTask = task.filter((v) => v.isDone)
-      this.incompleteTask = task.filter((v) => !v.isDone)
-    })
+    const isFirst = localStorage.getItem('isFirstFlg') === '0'
+    if(isFirst) {
+      console.log('ngOninit');
+      this.getTask()
+    }
+    localStorage.setItem('isFirstFlg', '1')
   }
 
   getTask(): void {
     this.http.getTask().subscribe((task) => {
-      this.completeTask = task.filter((v) => v.isDone)
-      this.incompleteTask = task.filter((v) => !v.isDone)
       this.store.dispatch(update({ task }))
     })
   }

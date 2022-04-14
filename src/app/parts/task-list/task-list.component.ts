@@ -27,22 +27,4 @@ export class TaskListComponent implements OnChanges {
       this.tasks = this.tasks.filter(task => !task.isDone)
     }
   }
-
-  onGoEdit(val: string) {
-    this.goEdit.emit(val)
-  }
-
-  onDoneTask($event: { id: number; isDone: boolean }) {
-    const { id, isDone } = $event
-    this.doneTask.emit({ id, isDone })
-  }
-
-  onDeleteTask(id: number) {
-    this.deleteTask.emit(id)
-  }
-
-
-  filterTask(tasks: TaskInfo[]) {
-    
-  }
 }

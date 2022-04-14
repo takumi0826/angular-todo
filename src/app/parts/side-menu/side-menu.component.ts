@@ -18,8 +18,6 @@ export class SideMenuComponent {
   menu: SideMenu[] = [
     { name: 'Todo', link: 'todo'},
     { name: 'Profile', link: 'profile' },
-    // { name: 'Sign-In', link: 'sign-in' },
-    // { name: 'Sign-Up', link: 'sign-up' },
   ]
 
   constructor(private authStore: Store<{auth: boolean}>, private route:Router) {}
