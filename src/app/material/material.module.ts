@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
 
 @NgModule({
   declarations: [],
@@ -27,6 +28,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatDividerModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
   ],
   exports: [
     MatToolbarModule,
@@ -40,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatDividerModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
   ],
 })
 export class MaterialModule {}

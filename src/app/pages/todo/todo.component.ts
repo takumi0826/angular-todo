@@ -24,17 +24,15 @@ export class TodoComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private store: Store<{ task: TaskInfo[] }>
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     const isFirst = localStorage.getItem('isFirstFlg') === '0'
-    if(isFirst) {
-      console.log('ngOninit');
+    if (isFirst) {
+      console.log('ngOninit')
       this.getTask()
+      localStorage.setItem('isFirstFlg', '1')
     }
-    localStorage.setItem('isFirstFlg', '1')
   }
 
   getTask(): void {
@@ -64,8 +62,8 @@ export class TodoComponent implements OnInit {
     })
   }
 
-  onDoneTask($event:{id: number, isDone: boolean}) {
-    const {id, isDone} = $event
+  onDoneTask($event: { id: number; isDone: boolean }) {
+    const { id, isDone } = $event
     this.http.doneTask(id, isDone).subscribe((res) => {
       this.getTask()
     })

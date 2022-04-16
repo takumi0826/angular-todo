@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
 import { AuthService } from 'src/app/services/auth.service'
+import { clear } from 'src/app/store/task/task.actions'
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,9 @@ import { AuthService } from 'src/app/services/auth.service'
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  constructor(private auth: AuthService) {}
+  constructor(private taskStore: Store) {}
 
   test() {
-    this.auth.fetchUser().subscribe()
+    this.taskStore.dispatch(clear())
   }
 }

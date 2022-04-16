@@ -31,6 +31,6 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     const auth$ = this.authStore.pipe(select('auth'))
-    return auth$
+    return true
   }
 }

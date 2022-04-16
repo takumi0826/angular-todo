@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import { finalize, take } from 'rxjs/operators'
+import { finalize, map, startWith, take } from 'rxjs/operators'
 import { ErrorMessage } from 'src/app/constant/error-massage-const'
 import { Url } from 'src/app/constant/url-const'
 import { AuthService } from 'src/app/services/auth.service'
@@ -20,12 +20,14 @@ export class SignInComponent {
   email = new FormControl('', [Validators.required, Validators.email])
   password = new FormControl('', [Validators.required, Validators.minLength(4)])
   hide = true
+  emailOptions: string[] = ['xxx@gmail.com', 'aaa@gmail.com', 'sss@gmail.com']
+  passwordOptions: string[] = ['12345', '1234']
 
   constructor(
     private auth: AuthService,
     private router: Router,
-    private userStore: Store<{ user: UserInfo }>,
-    private authStore: Store<{ auth: boolean }>
+    private userStore: Store,
+    private authStore: Store
   ) {}
 
   getErrorMailMessage() {
@@ -53,8 +55,8 @@ export class SignInComponent {
     }
     this.auth.signIn(user).subscribe((res) => {
       localStorage.setItem('access_token', res.access_token)
-      this.authStore.dispatch(authUpdate({isLogin: true}))
-      this.userStore.dispatch(update({user: res.user}))
+      this.authStore.dispatch(authUpdate({ isLogin: true }))
+      this.userStore.dispatch(update({ user: res.user }))
       this.router.navigateByUrl(Url.TODO)
     })
   }

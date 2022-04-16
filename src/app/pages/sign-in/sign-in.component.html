@@ -8,8 +8,13 @@
         matInput
         placeholder="pat@example.com"
         [formControl]="email"
-        autocomplete="off"
+        [matAutocomplete]="mail"
       />
+      <mat-autocomplete #mail="matAutocomplete">
+        <mat-option *ngFor="let option of emailOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
       <mat-error *ngIf="email.invalid">{{
         getErrorMailMessage()
       }}</mat-error> </mat-form-field
@@ -20,7 +25,13 @@
         matInput
         [type]="hide ? 'password' : 'text'"
         [formControl]="password"
+        [matAutocomplete]="pass"
       />
+      <mat-autocomplete #pass="matAutocomplete">
+        <mat-option *ngFor="let option of passwordOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
       <button
         mat-icon-button
         matSuffix
@@ -28,7 +39,7 @@
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
       >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="password.invalid">{{
         getErrorPassMessage()

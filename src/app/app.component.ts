@@ -21,9 +21,10 @@ export class AppComponent {
     private authStore: Store<{ auth: boolean }>,
     private auth: AuthService
   ) {
-    this.auth.fetchUser().subscribe(user => {
-      this.authStore.dispatch(authUpdate({isLogin: true}))
-      this.userStore.dispatch(update({user}))
+    this.auth.fetchUser().subscribe((user) => {
+      localStorage.setItem('isFirstFlg', '0')
+      this.authStore.dispatch(authUpdate({ isLogin: true }))
+      this.userStore.dispatch(update({ user }))
     })
   }
 }

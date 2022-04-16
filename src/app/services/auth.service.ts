@@ -12,14 +12,22 @@ import {
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import { User, JwtToken, CreateUser, UserInfo } from 'src/app/model/type'
+import {
+  User,
+  JwtToken,
+  CreateUser,
+  UserInfo,
+  TaskInfo,
+} from 'src/app/model/type'
 import { Store } from '@ngrx/store'
-import { clear, update } from 'src/app/store/user/user.actions'
+import { clear as userClear, update } from 'src/app/store/user/user.actions'
+import { clear as taskClear } from 'src/app/store/task/task.actions'
 import {
   clear as authClear,
   update as authUpdate,
 } from 'src/app/store/auth/auth.actions'
 import { LoadingService } from './loading.service'
+import { Url } from '../constant/url-const'
 
 @Injectable({
   providedIn: 'root',
@@ -36,8 +44,9 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private userStore: Store<{ user: UserInfo }>,
-    private authStore: Store<{ auth: boolean }>,
+    private userStore: Store,
+    private authStore: Store,
+    private taskStore: Store,
     private load: LoadingService
   ) {}
 
@@ -75,9 +84,10 @@ export class AuthService {
   public signOut(): void {
     localStorage.removeItem('access_token')
     localStorage.setItem('isFirstFlg', '0')
-    this.userStore.dispatch(clear())
+    this.taskStore.dispatch(taskClear())
+    this.userStore.dispatch(userClear())
     this.authStore.dispatch(authClear())
-    this.router.navigateByUrl('/sign-in')
+    location.href = Url.SIGN_IN
   }
 
   public fetchUser(): Observable<UserInfo> {
@@ -85,7 +95,8 @@ export class AuthService {
     return this.http.get<UserInfo>(url, <Object>this.httpOptions).pipe(
       catchError((e) => {
         console.log(`fetchUser: ${e.error.message}`)
-        this.userStore.dispatch(clear())
+        this.taskStore.dispatch(taskClear())
+        this.userStore.dispatch(userClear())
         this.authStore.dispatch(authClear())
         localStorage.setItem('isFirstFlg', '0')
         return EMPTY
