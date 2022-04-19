@@ -21,7 +21,7 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  public createTask(task: TaskItem): Observable<number> {
+  public create(task: TaskItem): Observable<number> {
     const url = `${this.host}/create/v1`
     return this.http.post<number>(url, task, <Object>this.httpOptions).pipe(
       catchError((e) => {
@@ -29,12 +29,12 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('createTask:処理終了')
+        console.log('create:処理終了')
       })
     )
   }
 
-  public getTask(): Observable<TaskInfo[]> {
+  public loadAll(): Observable<TaskInfo[]> {
     const url = `${this.host}/get-all/v1`
     return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions).pipe(
       catchError((e) => {
@@ -42,12 +42,25 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('getTask:処理終了')
+        console.log('loadAll:処理終了')
       })
     )
   }
 
-  public updateTask(task: TaskInfo): Observable<number> {
+  public load(id: number): Observable<TaskInfo> {
+    const url = `${this.host}/get-one/v1?id=${id}`
+    return this.http.get<TaskInfo>(url, <Object>this.httpOptions).pipe(
+      catchError((e) => {
+        console.log(`エラーメッセージ: ${e.error.message}`)
+        return EMPTY
+      }),
+      finalize(() => {
+        console.log('load:処理終了')
+      })
+    )
+  }
+
+  public update(task: TaskInfo): Observable<number> {
     const url = `${this.host}/update/v1`
     return this.http.put<number>(url, task, <Object>this.httpOptions).pipe(
       catchError((e) => {
@@ -55,12 +68,12 @@ export class TaskService {
         return EMPTY
       }),
       finalize(() => {
-        console.log('updateTask:処理終了')
+        console.log('update:処理終了')
       })
     )
   }
 
-  public deleteTask(id: number): Observable<number> {
+  public delete(id: number): Observable<number> {
     const url = `${this.host}/delete/v1?id=${id}`
     return this.http.delete<number>(url, <Object>this.httpOptions).pipe(
       catchError((e) => {
@@ -69,19 +82,6 @@ export class TaskService {
       }),
       finalize(() => {
         console.log('deleteTask:処理終了')
-      })
-    )
-  }
-
-  public getOneTask(id: number): Observable<TaskInfo> {
-    const url = `${this.host}/get-one/v1?id=${id}`
-    return this.http.get<TaskInfo>(url, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`エラーメッセージ: ${e.error.message}`)
-        return EMPTY
-      }),
-      finalize(() => {
-        console.log('getOneTask:処理終了')
       })
     )
   }

@@ -3,7 +3,8 @@ import { Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
 import { Url } from 'src/app/constant/url-const'
 import { SideMenu } from 'src/app/model/type'
-
+import * as AppActions from 'src/app/store/app/app-store.actions'
+import * as AppSelectors from 'src/app/store/app/app-store.selectors'
 
 @Component({
   selector: 'app-side-menu',
@@ -11,16 +12,14 @@ import { SideMenu } from 'src/app/model/type'
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent {
-
-  isLogin$ = this.authStore.pipe(select('auth'))
-
+  isLogin$ = this.store.select(AppSelectors.getLogin)
 
   menu: SideMenu[] = [
-    { name: 'Todo', link: 'todo'},
+    { name: 'Todo', link: 'todo' },
     { name: 'Profile', link: 'profile' },
   ]
 
-  constructor(private authStore: Store<{auth: boolean}>, private route:Router) {}
+  constructor(private store: Store, private route: Router) {}
 
   goSignIn() {
     this.route.navigateByUrl(Url.SIGN_IN)

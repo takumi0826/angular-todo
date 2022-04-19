@@ -35,7 +35,7 @@ export class EditComponent implements OnInit {
   getHero(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'))
     this.routeId = id
-    this.taskService.getOneTask(id).subscribe((res) => {
+    this.taskService.load(id).subscribe((res) => {
       this.taskInfo = res
     })
   }
@@ -44,7 +44,7 @@ export class EditComponent implements OnInit {
     if (!task.title.trim()) {
       return
     }
-    this.taskService.updateTask(task).subscribe((res) => {
+    this.taskService.update(task).subscribe((res) => {
       this.router.navigateByUrl(Url.TODO)
     })
   }

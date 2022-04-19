@@ -4,9 +4,10 @@ import { AuthService } from 'src/app/services/auth.service'
 import { TaskService } from 'src/app/services/task.service'
 import { TaskInfo } from 'src/app/model/type'
 import { select, Store } from '@ngrx/store'
-import { update } from 'src/app/store/task/task.actions'
 import { Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import { loadAll } from 'src/app/store/task/task.actions'
+import * as TaskSelectors from 'src/app/store/task/task.selectors'
 
 @Component({
   selector: 'app-todo',
@@ -16,29 +17,22 @@ import { filter } from 'rxjs/operators'
 export class TodoComponent implements OnInit {
   completeTask: TaskInfo[] = []
   incompleteTask: TaskInfo[] = []
-  task$ = this.store.pipe(select('task'))
+  task$ = this.store.pipe(select(TaskSelectors.getTasks))
   taskTitle: string = ''
 
   constructor(
-    private http: TaskService,
+    private taskService: TaskService,
     private router: Router,
     private auth: AuthService,
-    private store: Store<{ task: TaskInfo[] }>
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    const isFirst = localStorage.getItem('isFirstFlg') === '0'
-    if (isFirst) {
-      console.log('ngOninit')
-      this.getTask()
-      localStorage.setItem('isFirstFlg', '1')
-    }
+    this.loadAll()
   }
 
-  getTask(): void {
-    this.http.getTask().subscribe((task) => {
-      this.store.dispatch(update({ task }))
-    })
+  loadAll(): void {
+    this.store.dispatch(loadAll())
   }
 
   addTask(title: string): void {
@@ -48,24 +42,24 @@ export class TodoComponent implements OnInit {
       content: '',
       isDone: false,
     }
-    this.http.createTask(param).subscribe((res) => {
+    this.taskService.create(param).subscribe((res) => {
       this.taskTitle = ''
-      this.getTask()
+      this.loadAll()
     })
   }
 
-  updateTask(): void {}
+  update(): void {}
 
   onDeleteTask(id: number): void {
-    this.http.deleteTask(id).subscribe((res) => {
-      this.getTask()
+    this.taskService.delete(id).subscribe((res) => {
+      this.loadAll()
     })
   }
 
   onDoneTask($event: { id: number; isDone: boolean }) {
     const { id, isDone } = $event
-    this.http.doneTask(id, isDone).subscribe((res) => {
-      this.getTask()
+    this.taskService.doneTask(id, isDone).subscribe((res) => {
+      this.loadAll()
     })
   }
 

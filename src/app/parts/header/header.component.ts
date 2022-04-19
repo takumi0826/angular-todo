@@ -10,9 +10,8 @@ import { UserInfo } from 'src/app/model/type'
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-
   @Input() user!: UserInfo
-  constructor(private router: Router, private store: Store<{user: UserInfo}>) {}
+  constructor(private router: Router) {}
 
   routerLink(url: string) {
     this.router.navigateByUrl(url)

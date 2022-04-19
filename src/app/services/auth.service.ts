@@ -20,14 +20,10 @@ import {
   TaskInfo,
 } from 'src/app/model/type'
 import { Store } from '@ngrx/store'
-import { clear as userClear, update } from 'src/app/store/user/user.actions'
-import { clear as taskClear } from 'src/app/store/task/task.actions'
-import {
-  clear as authClear,
-  update as authUpdate,
-} from 'src/app/store/auth/auth.actions'
+import * as TaskActions from 'src/app/store/task/task.actions'
 import { LoadingService } from './loading.service'
 import { Url } from '../constant/url-const'
+import * as AppActions from '../store/app/app-store.actions'
 
 @Injectable({
   providedIn: 'root',
@@ -44,9 +40,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private userStore: Store,
-    private authStore: Store,
-    private taskStore: Store,
+    private store: Store,
     private load: LoadingService
   ) {}
 
@@ -54,10 +48,6 @@ export class AuthService {
     this.load.start()
     const url = `${this.host}/sign-in`
     return this.http.post<JwtToken>(url, user, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`sign-in: ${e.error.message}`)
-        return EMPTY
-      }),
       finalize(() => {
         console.log('sign-in:処理終了')
         this.load.stop()
@@ -84,23 +74,14 @@ export class AuthService {
   public signOut(): void {
     localStorage.removeItem('access_token')
     localStorage.setItem('isFirstFlg', '0')
-    this.taskStore.dispatch(taskClear())
-    this.userStore.dispatch(userClear())
-    this.authStore.dispatch(authClear())
+    this.store.dispatch(TaskActions.clear())
+    this.store.dispatch(AppActions.appInit())
     location.href = Url.SIGN_IN
   }
 
   public fetchUser(): Observable<UserInfo> {
     const url = `${this.host}/profile`
     return this.http.get<UserInfo>(url, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`fetchUser: ${e.error.message}`)
-        this.taskStore.dispatch(taskClear())
-        this.userStore.dispatch(userClear())
-        this.authStore.dispatch(authClear())
-        localStorage.setItem('isFirstFlg', '0')
-        return EMPTY
-      }),
       finalize(() => {
         console.log('fetchUser:処理終了')
       })

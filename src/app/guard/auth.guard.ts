@@ -11,17 +11,12 @@ import {
 import { AuthService } from '../services/auth.service'
 import { UserInfo } from '../model/type'
 import { select, Store } from '@ngrx/store'
-import { update } from '../store/auth/auth.actions'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private auth: AuthService,
-    private route: Router,
-    private authStore: Store<{ auth: boolean }>
-  ) {}
+  constructor(private auth: AuthService, private route: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -30,7 +25,6 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const auth$ = this.authStore.pipe(select('auth'))
     return true
   }
 }

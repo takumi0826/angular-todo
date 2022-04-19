@@ -3,13 +3,11 @@ import { FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
-import { finalize, map, startWith, take } from 'rxjs/operators'
 import { ErrorMessage } from 'src/app/constant/error-massage-const'
 import { Url } from 'src/app/constant/url-const'
 import { AuthService } from 'src/app/services/auth.service'
-import { update as authUpdate } from 'src/app/store/auth/auth.actions'
 import { User, UserInfo } from 'src/app/model/type'
-import { update } from 'src/app/store/user/user.actions'
+import * as AppActions from 'src/app/store/app/app-store.actions'
 
 @Component({
   selector: 'app-sign-in',
@@ -26,8 +24,7 @@ export class SignInComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private userStore: Store,
-    private authStore: Store
+    private store: Store
   ) {}
 
   getErrorMailMessage() {
@@ -55,8 +52,7 @@ export class SignInComponent {
     }
     this.auth.signIn(user).subscribe((res) => {
       localStorage.setItem('access_token', res.access_token)
-      this.authStore.dispatch(authUpdate({ isLogin: true }))
-      this.userStore.dispatch(update({ user: res.user }))
+      this.store.dispatch(AppActions.getUser())
       this.router.navigateByUrl(Url.TODO)
     })
   }
