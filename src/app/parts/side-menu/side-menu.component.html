@@ -1,9 +1,4 @@
 <mat-list role="list">
-  <mat-list-item role="listitem">
-    <a class="list__link">
-      {{ isLogin$ | async }}
-    </a>
-  </mat-list-item>
   <ng-container *ngFor="let item of menu">
     <mat-list-item role="listitem" *ngIf="isLogin$ | async">
       <a class="list__link" routerLink="{{ item.link }}">

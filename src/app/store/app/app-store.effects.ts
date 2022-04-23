@@ -8,6 +8,7 @@ import {
   concatMap,
   tap,
   first,
+  mergeMap,
 } from 'rxjs/operators'
 import * as AppActions from './app-store.actions'
 import { AuthService } from 'src/app/services/auth.service'
@@ -21,10 +22,10 @@ export class AppEffects {
       ofType(AppActions.auth),
       switchMap(() =>
         this.authService.fetchUser().pipe(
-          map((user) => {
-            AppActions.loginSuccess()
-            return AppActions.authSuccess({ user })
-          }),
+          mergeMap((user) => [
+            AppActions.authSuccess({ user }),
+            AppActions.loginSuccess(),
+          ]),
           catchError((error) => {
             AppActions.loginFailure()
             return of(AppActions.authFailure())

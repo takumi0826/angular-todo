@@ -5,13 +5,13 @@ import * as AppActions from './app-store.actions'
 export const appFeatureKey = 'app'
 
 export interface AppState {
-  isloading: boolean
+  isLoading: boolean
   user: UserInfo
   isLogin: boolean
 }
 
 export const initialState: AppState = {
-  isloading: false,
+  isLoading: false,
   user: {
     userId: '',
     userName: '',
@@ -21,25 +21,25 @@ export const initialState: AppState = {
 
 const appReducer = createReducer(
   initialState,
-  on(AppActions.auth, (state) => ({ ...state, isloading: true })),
+  on(AppActions.auth, (state) => ({ ...state, isLoading: true })),
   on(AppActions.authSuccess, (state, { user }) => ({
     ...state,
-    isloading: false,
+    isLoading: false,
     user,
   })),
   on(AppActions.authFailure, (state) => ({
     ...state,
-    isloading: false,
+    isLoading: false,
   })),
-  on(AppActions.login, (state) => ({ ...state, isloading: true })),
+  on(AppActions.login, (state) => ({ ...state, isLoading: true })),
   on(AppActions.loginSuccess, (state) => ({
     ...state,
-    isloading: false,
+    isLoading: false,
     isLogin: true,
   })),
   on(AppActions.loginFailure, (state) => ({
     ...state,
-    isloading: false,
+    isLoading: false,
   })),
   on(AppActions.appInit, (state) => initialState)
 )

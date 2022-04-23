@@ -3,7 +3,7 @@ import { appFeatureKey, AppState } from './app-store.reducers'
 
 const getState = createFeatureSelector<AppState>(appFeatureKey)
 
-export const getLoading = createSelector(getState, (state) => state.isloading)
+export const getLoading = createSelector(getState, (state) => state.isLoading)
 
 export const getUser = createSelector(getState, (state) => state.user)
 
