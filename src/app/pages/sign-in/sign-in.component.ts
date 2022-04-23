@@ -52,7 +52,7 @@ export class SignInComponent {
     }
     this.auth.signIn(user).subscribe((res) => {
       localStorage.setItem('access_token', res.access_token)
-      this.store.dispatch(AppActions.getUser())
+      this.store.dispatch(AppActions.auth())
       this.router.navigateByUrl(Url.TODO)
     })
   }

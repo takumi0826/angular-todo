@@ -15,7 +15,6 @@ export class TaskService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     }),
   }
 
@@ -36,15 +35,7 @@ export class TaskService {
 
   public loadAll(): Observable<TaskInfo[]> {
     const url = `${this.host}/get-all/v1`
-    return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`エラーメッセージ: ${e.error.message}`)
-        return EMPTY
-      }),
-      finalize(() => {
-        console.log('loadAll:処理終了')
-      })
-    )
+    return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions)
   }
 
   public load(id: number): Observable<TaskInfo> {

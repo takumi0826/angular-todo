@@ -34,7 +34,6 @@ export class AuthService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     }),
   }
   constructor(
@@ -76,11 +75,12 @@ export class AuthService {
     localStorage.setItem('isFirstFlg', '0')
     this.store.dispatch(TaskActions.clear())
     this.store.dispatch(AppActions.appInit())
-    location.href = Url.SIGN_IN
+    this.router.navigateByUrl(Url.SIGN_IN)
   }
 
   public fetchUser(): Observable<UserInfo> {
     const url = `${this.host}/profile`
+
     return this.http.get<UserInfo>(url, <Object>this.httpOptions).pipe(
       finalize(() => {
         console.log('fetchUser:処理終了')

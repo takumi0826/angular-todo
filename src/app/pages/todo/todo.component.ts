@@ -6,7 +6,7 @@ import { TaskInfo } from 'src/app/model/type'
 import { select, Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
-import { loadAll } from 'src/app/store/task/task.actions'
+import * as TaskActions from 'src/app/store/task/task.actions'
 import * as TaskSelectors from 'src/app/store/task/task.selectors'
 
 @Component({
@@ -32,7 +32,7 @@ export class TodoComponent implements OnInit {
   }
 
   loadAll(): void {
-    this.store.dispatch(loadAll())
+    this.store.dispatch(TaskActions.loadAll())
   }
 
   addTask(title: string): void {

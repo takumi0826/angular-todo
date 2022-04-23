@@ -1,19 +1,19 @@
 import { createAction, props } from '@ngrx/store'
 import { TaskInfo, UserInfo } from '../../model/type'
 
-export const getUser = createAction('[Todo Page] Load All')
+export const auth = createAction('[App] auth')
 
-export const getUserSuccess = createAction(
-  '[Todo API] Load All Success',
+export const authSuccess = createAction(
+  '[App] authSuccess',
   props<{ user: UserInfo }>()
 )
 
-export const getUserFailure = createAction('[Todo API] Load All Failure')
+export const authFailure = createAction('[App] authFailure')
 
-export const getLogin = createAction('[Todo Page] Load All')
+export const login = createAction('[App] login')
 
-export const getLoginSuccess = createAction('[Todo API] Load All Success')
+export const loginSuccess = createAction('[App] loginSuccess')
 
-export const getLoginFailure = createAction('[Todo API] Load All Failure')
+export const loginFailure = createAction('[App] loginFailure')
 
-export const appInit = createAction('[Todo API] Load All Failure')
+export const appInit = createAction('[App] appInit')

@@ -18,11 +18,12 @@ import { HeaderComponent } from './parts/header/header.component'
 import { LoadingComponent } from './parts/loading/loading.component'
 import { SideMenuComponent } from './parts/side-menu/side-menu.component'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AlertDirective } from './directive/alert.directive'
 import { TaskListComponent } from './parts/task-list/task-list.component'
 import { TaskListItemComponent } from './parts/task-list-item/task-list-item.component'
 import { AppStoreModule } from './store/app/app-store.module'
+import { RequestInterceptor } from './interceptor/request.interceptor'
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import { AppStoreModule } from './store/app/app-store.module'
     TaskModule,
     AppStoreModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

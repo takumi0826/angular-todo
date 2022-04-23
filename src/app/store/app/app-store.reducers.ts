@@ -21,23 +21,23 @@ export const initialState: AppState = {
 
 const appReducer = createReducer(
   initialState,
-  on(AppActions.getUser, (state) => ({ ...state, isloading: true })),
-  on(AppActions.getUserSuccess, (state, { user }) => ({
+  on(AppActions.auth, (state) => ({ ...state, isloading: true })),
+  on(AppActions.authSuccess, (state, { user }) => ({
     ...state,
     isloading: false,
     user,
   })),
-  on(AppActions.getUserFailure, (state) => ({
+  on(AppActions.authFailure, (state) => ({
     ...state,
     isloading: false,
   })),
-  on(AppActions.getLogin, (state) => ({ ...state, isloading: true })),
-  on(AppActions.getLoginSuccess, (state) => ({
+  on(AppActions.login, (state) => ({ ...state, isloading: true })),
+  on(AppActions.loginSuccess, (state) => ({
     ...state,
     isloading: false,
     isLogin: true,
   })),
-  on(AppActions.getLoginFailure, (state) => ({
+  on(AppActions.loginFailure, (state) => ({
     ...state,
     isloading: false,
   })),

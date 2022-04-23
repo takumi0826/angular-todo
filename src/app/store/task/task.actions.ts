@@ -1,22 +1,13 @@
 import { createAction, props } from '@ngrx/store'
 import { TaskInfo } from '../../model/type'
 
-export const loadAll = createAction('[Todo Page] Load All')
+export const loadAll = createAction('[Task] loadAll')
 
 export const loadAllSuccess = createAction(
-  '[Todo API] Load All Success',
+  '[Task] loadAllSuccess',
   props<{ tasks: TaskInfo[] }>()
 )
 
-export const loadAllFailure = createAction('[Todo API] Load All Failure')
+export const loadAllFailure = createAction('[Task] loadAllFailure')
 
-export const load = createAction('[Todo Page] Load', props<{ id: number }>())
-
-export const loadSuccess = createAction(
-  '[Todo API] Load Success',
-  props<{ task: TaskInfo }>()
-)
-
-export const loadFailure = createAction('[Todo API] Load Failure')
-
-export const clear = createAction('[Todo API] clear')
+export const clear = createAction('[Task] clear')

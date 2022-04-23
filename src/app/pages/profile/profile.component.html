@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-title>プロフィール</mat-card-title>
+  <mat-card-title>{{ 'プロフィール' | isValid }}</mat-card-title>
   <mat-card-actions align="end">
     <button mat-button (click)="test()">Like</button>
     <button mat-button appAlert>SHARE</button>

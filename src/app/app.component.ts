@@ -16,6 +16,6 @@ export class AppComponent {
   user$ = this.store.select(AppSelectors.getUser)
   isLogin$ = this.store.select(AppSelectors.getLogin)
   constructor(private router: Router, private store: Store) {
-    this.store.dispatch(AppActions.getUser())
+    this.store.dispatch(AppActions.auth())
   }
 }
