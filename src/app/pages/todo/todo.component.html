@@ -34,6 +34,7 @@
       </div>
       <app-task-list
         [tasks]="task$ | async"
+        [isLoading]="isLoading$ | async"
         [isCompleted]="false"
         (goEdit)="onGoEdit($event)"
         (doneTask)="onDoneTask($event)"

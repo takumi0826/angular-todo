@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
 import { AuthService } from './services/auth.service'
@@ -13,8 +13,9 @@ import * as AppSelectors from './store/app/app-store.selectors'
 })
 export class AppComponent {
   title = 'angular-todo'
-  user$ = this.store.select(AppSelectors.getUser)
   isLogin$ = this.store.select(AppSelectors.getLogin)
+  isLoading$ = this.store.select(AppSelectors.getLoading)
+  visible = false
   constructor(private router: Router, private store: Store) {
     this.store.dispatch(AppActions.auth())
   }

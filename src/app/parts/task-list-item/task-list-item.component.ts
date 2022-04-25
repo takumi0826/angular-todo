@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Url } from 'src/app/constant/url-const'
 import { TaskInfo } from 'src/app/model/type'
 
 @Component({
@@ -8,17 +9,16 @@ import { TaskInfo } from 'src/app/model/type'
 })
 export class TaskListItemComponent {
   @Input() task!: TaskInfo
+  @Input() isLoading!: boolean | null
   @Input() isCompleted!: boolean
   @Output() goEdit = new EventEmitter<string>()
   @Output() doneTask = new EventEmitter<{ id: number; isDone: boolean }>()
   @Output() deleteTask = new EventEmitter<number>()
 
-  constructor() {
+  constructor() {}
 
-  }
-
-  onGoEdit(val: string) {
-    this.goEdit.emit(val)
+  onGoEdit(id: number) {
+    this.goEdit.emit(`${Url.EDIT}/${id}`)
   }
 
   onDoneTask(id: number, isDone: boolean): void {

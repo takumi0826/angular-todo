@@ -12,11 +12,9 @@ import * as AppSelectors from 'src/app/store/app/app-store.selectors'
   styleUrls: ['./side-menu.component.scss'],
 })
 export class SideMenuComponent {
-  isLogin$ = this.store.select(AppSelectors.getLogin)
-
   menu: SideMenu[] = [
-    { name: 'Todo', link: 'todo' },
-    { name: 'Profile', link: 'profile' },
+    { name: 'Todo', link: Url.TODO },
+    { name: 'Profile', link: Url.PROFILE },
   ]
 
   constructor(private store: Store, private route: Router) {}

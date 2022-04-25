@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { TaskInfo } from 'src/app/model/type'
 
 @Component({
@@ -8,23 +15,22 @@ import { TaskInfo } from 'src/app/model/type'
 })
 export class TaskListComponent implements OnChanges {
   @Input() tasks: TaskInfo[] | null = []
+  @Input() isLoading!: boolean | null
   @Input() isCompleted!: boolean
   @Output() goEdit = new EventEmitter<string>()
   @Output() doneTask = new EventEmitter<{ id: number; isDone: boolean }>()
   @Output() deleteTask = new EventEmitter<number>()
 
-  taskInfo:TaskInfo[] = []
+  taskInfo: TaskInfo[] = []
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnChanges(): void {
-    if(!this.tasks) return
-    if(this.isCompleted) {
-      this.tasks = this.tasks.filter(task => task.isDone)
-    }else {
-      this.tasks = this.tasks.filter(task => !task.isDone)
+    if (!this.tasks) return
+    if (this.isCompleted) {
+      this.tasks = this.tasks.filter((task) => task.isDone)
+    } else {
+      this.tasks = this.tasks.filter((task) => !task.isDone)
     }
   }
 }

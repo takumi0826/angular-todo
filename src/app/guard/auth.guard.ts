@@ -11,12 +11,18 @@ import {
 import { AuthService } from '../services/auth.service'
 import { UserInfo } from '../model/type'
 import { select, Store } from '@ngrx/store'
+import * as AppSelectors from '../store/app/app-store.selectors'
+import { concatMap, map, withLatestFrom } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private route: Router) {}
+  constructor(
+    private auth: AuthService,
+    private route: Router,
+    private store: Store
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -25,6 +31,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true
+    // let loginState = false
+    // this.store
+    //   .select(AppSelectors.getLogin)
+    //   .subscribe((isLogin) => (loginState = isLogin))
+    // return loginState
+
+    return !!localStorage.getItem('access_token')
   }
 }

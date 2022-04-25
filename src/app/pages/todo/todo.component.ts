@@ -17,7 +17,8 @@ import * as TaskSelectors from 'src/app/store/task/task.selectors'
 export class TodoComponent implements OnInit {
   completeTask: TaskInfo[] = []
   incompleteTask: TaskInfo[] = []
-  task$ = this.store.pipe(select(TaskSelectors.getTasks))
+  task$ = this.store.select(TaskSelectors.getTasks)
+  isLoading$ = this.store.select(TaskSelectors.getLoading)
   taskTitle: string = ''
 
   constructor(

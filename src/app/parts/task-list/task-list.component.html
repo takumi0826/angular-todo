@@ -1,11 +1,12 @@
 <mat-list class="task__list" role="list" *ngIf="tasks !== null">
   <ng-container *ngFor="let task of tasks">
     <app-task-list-item
-    [task]="task"
-    [isCompleted]="isCompleted"
-    (goEdit)="goEdit.emit($event)"
-    (doneTask)="doneTask.emit($event)"
-    (deleteTask)="deleteTask.emit($event)"
+      [task]="task"
+      [isLoading]="isLoading"
+      [isCompleted]="isCompleted"
+      (goEdit)="goEdit.emit($event)"
+      (doneTask)="doneTask.emit($event)"
+      (deleteTask)="deleteTask.emit($event)"
     ></app-task-list-item>
   </ng-container>
 </mat-list>

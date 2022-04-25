@@ -35,7 +35,11 @@ export class TaskService {
 
   public loadAll(): Observable<TaskInfo[]> {
     const url = `${this.host}/get-all/v1`
-    return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions)
+    return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions).pipe(
+      finalize(() => {
+        console.log('loadAll:処理終了')
+      })
+    )
   }
 
   public load(id: number): Observable<TaskInfo> {

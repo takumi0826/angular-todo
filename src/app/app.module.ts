@@ -23,7 +23,8 @@ import { AlertDirective } from './directive/alert.directive'
 import { TaskListComponent } from './parts/task-list/task-list.component'
 import { TaskListItemComponent } from './parts/task-list-item/task-list-item.component'
 import { AppStoreModule } from './store/app/app-store.module'
-import { RequestInterceptor } from './interceptor/request.interceptor'
+import { RequestInterceptor } from './interceptor/request.interceptor';
+import { DashboardComponent } from './pages/dashboard/dashboard.component'
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RequestInterceptor } from './interceptor/request.interceptor'
     AlertDirective,
     TaskListComponent,
     TaskListItemComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,8 @@
       mat-mini-fab
       color="primary"
       aria-label="Example icon button with a vertical three dot icon"
-      (click)="onGoEdit('/edit/' + task.id)"
+      (click)="onGoEdit(task.id)"
+      [disabled]="isLoading"
     >
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -17,6 +18,7 @@
       color="accent"
       aria-label="Example icon button with a delete icon"
       (click)="onDoneTask(task.id, true)"
+      [disabled]="isLoading"
     >
       <mat-icon>done</mat-icon>
     </button>
@@ -28,6 +30,7 @@
       color="basic"
       aria-label="Example icon button with a delete icon"
       (click)="onDoneTask(task.id, false)"
+      [disabled]="isLoading"
     >
       <mat-icon>keyboard_backspace</mat-icon>
     </button>
@@ -37,6 +40,7 @@
       color="warn"
       aria-label="Example icon button with a delete icon"
       (click)="onDeleteTask(task.id)"
+      [disabled]="isLoading"
     >
       <mat-icon>delete</mat-icon>
     </button>

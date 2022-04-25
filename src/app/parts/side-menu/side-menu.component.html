@@ -1,20 +1,9 @@
 <mat-list role="list">
   <ng-container *ngFor="let item of menu">
-    <mat-list-item role="listitem" *ngIf="isLogin$ | async">
+    <mat-list-item role="listitem">
       <a class="list__link" routerLink="{{ item.link }}">
         {{ item.name }}
       </a>
     </mat-list-item>
   </ng-container>
-  <mat-list-item role="listitem" *ngIf="(isLogin$ | async) === false">
-    <a class="list__link" routerLink="/sign-in">SignIn</a>
-  </mat-list-item>
-  <mat-list-item role="listitem">
-    <a
-      class="list__link"
-      *ngIf="(isLogin$ | async) === false"
-      routerLink="/sign-up"
-      >SignUp</a
-    >
-  </mat-list-item>
 </mat-list>

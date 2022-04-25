@@ -1,12 +1,9 @@
-<app-header [user]="(user$ | async)!"></app-header>
-<mat-drawer-container class="app">
-  <mat-drawer mode="side" opened>
-    <app-side-menu></app-side-menu>
-  </mat-drawer>
-  <mat-drawer-content>
-    <main class="main">
-      <router-outlet></router-outlet>
-    </main>
-  </mat-drawer-content>
-</mat-drawer-container>
-<app-loading></app-loading>
+<div *ngIf="isLogin$ | async; else notLogin">
+  <app-dashboard></app-dashboard>
+</div>
+
+<ng-template #notLogin>
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
+</ng-template>
