@@ -7,9 +7,8 @@ import * as AppSelectors from 'src/app/store/app/app-store.selectors'
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   user$ = this.store.select(AppSelectors.getUser)
+  isLogin$ = this.store.select(AppSelectors.getLogin)
   constructor(private store: Store) {}
-
-  ngOnInit(): void {}
 }

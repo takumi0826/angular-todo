@@ -1,9 +1,1 @@
-<div *ngIf="isLogin$ | async; else notLogin">
-  <app-dashboard></app-dashboard>
-</div>
-
-<ng-template #notLogin>
-  <main class="main">
-    <router-outlet></router-outlet>
-  </main>
-</ng-template>
+<app-dashboard></app-dashboard>

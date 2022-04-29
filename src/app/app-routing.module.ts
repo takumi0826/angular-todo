@@ -4,14 +4,12 @@ import { RouterModule, Routes } from '@angular/router'
 import { EditComponent } from './pages/edit/edit.component'
 import { AuthGuard } from './guard/auth.guard'
 import { ProfileComponent } from './pages/profile/profile.component'
-import { SignInComponent } from './pages/sign-in/sign-in.component'
 import { SignOutComponent } from './pages/sign-out/sign-out.component'
-import { SignUpComponent } from './pages/sign-up/sign-up.component'
 import { TodoComponent } from './pages/todo/todo.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
+import { TopComponent } from './pages/top/top.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'sign-in', pathMatch: 'full' },
   {
     path: 'dashboard',
     canActivate: [AuthGuard],
@@ -26,9 +24,8 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'sign-up', component: SignUpComponent },
   { path: 'sign-out', component: SignOutComponent },
+  { path: '', component: TopComponent },
 ]
 
 @NgModule({

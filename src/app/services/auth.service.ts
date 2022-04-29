@@ -75,7 +75,7 @@ export class AuthService {
     localStorage.setItem('isFirstFlg', '0')
     this.store.dispatch(TaskActions.clear())
     this.store.dispatch(AppActions.appInit())
-    this.router.navigateByUrl(Url.SIGN_IN)
+    this.router.navigateByUrl(Url.TOP)
   }
 
   public fetchUser(): Observable<UserInfo> {
