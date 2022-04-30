@@ -13,6 +13,7 @@ import { UserInfo } from '../model/type'
 import { select, Store } from '@ngrx/store'
 import * as AppSelectors from '../store/app/app-store.selectors'
 import { concatMap, map, withLatestFrom } from 'rxjs/operators'
+import { Url } from '../constant/url-const'
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,9 @@ export class AuthGuard implements CanActivate {
     //   .select(AppSelectors.getLogin)
     //   .subscribe((isLogin) => (loginState = isLogin))
     // return loginState
-
-    return !!localStorage.getItem('access_token')
+    if (!localStorage.getItem('access_token')) {
+      this.route.navigateByUrl(Url.TOP)
+    }
+    return true
   }
 }

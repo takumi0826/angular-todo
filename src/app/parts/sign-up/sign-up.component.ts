@@ -50,8 +50,4 @@ export class SignUpComponent {
       console.log(val)
     })
   }
-
-  routerLink(url: string) {
-    this.router.navigateByUrl(url)
-  }
 }

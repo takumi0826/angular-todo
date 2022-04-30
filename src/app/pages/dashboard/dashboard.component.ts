@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import * as AppSelectors from 'src/app/store/app/app-store.selectors'
 
@@ -9,6 +9,6 @@ import * as AppSelectors from 'src/app/store/app/app-store.selectors'
 })
 export class DashboardComponent {
   user$ = this.store.select(AppSelectors.getUser)
-  isLogin$ = this.store.select(AppSelectors.getLogin)
+  @Input() isLogin: boolean = false
   constructor(private store: Store) {}
 }

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router'
 import { EditComponent } from './pages/edit/edit.component'
 import { AuthGuard } from './guard/auth.guard'
 import { ProfileComponent } from './pages/profile/profile.component'
-import { SignOutComponent } from './pages/sign-out/sign-out.component'
+import { SignOutComponent } from './parts/sign-out/sign-out.component'
 import { TodoComponent } from './pages/todo/todo.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { TopComponent } from './pages/top/top.component'
@@ -24,8 +24,8 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'sign-out', component: SignOutComponent },
   { path: '', component: TopComponent },
+  { path: '**', redirectTo: '' },
 ]
 
 @NgModule({

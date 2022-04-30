@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { select, Store } from '@ngrx/store'
 import { Url } from 'src/app/constant/url-const'
@@ -13,17 +13,8 @@ import * as AppSelectors from 'src/app/store/app/app-store.selectors'
 })
 export class SideMenuComponent {
   menu: SideMenu[] = [
-    { name: 'Todo', link: Url.TODO },
-    { name: 'Profile', link: Url.PROFILE },
+    { name: 'タスク一覧', link: Url.TODO },
+    { name: 'プロフィール', link: Url.PROFILE },
   ]
-
   constructor(private store: Store, private route: Router) {}
-
-  goSignIn() {
-    this.route.navigateByUrl(Url.SIGN_IN)
-  }
-
-  goSignUp() {
-    this.route.navigateByUrl(Url.SIGN_UP)
-  }
 }

@@ -15,11 +15,21 @@
 
     <span *ngIf="!!user">{{ user.userName }}</span>
     <span class="spacer"></span>
+    <a
+      mat-icon-button
+      class="icon input-icon"
+      aria-label="Example icon-button with sign-in icon"
+      target="_blank"
+      href="https://github.com/takumi0826/angular-todo"
+    >
+      <mat-icon svgIcon="github"></mat-icon>
+    </a>
     <button
       mat-icon-button
       class="icon input-icon"
       aria-label="Example icon-button with sign-in icon"
-      (click)="routerLink('/sign-out')"
+      (click)="openDialog()"
+      *ngIf="isLogin"
     >
       <mat-icon>input</mat-icon>
     </button>

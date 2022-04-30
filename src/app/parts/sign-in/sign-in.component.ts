@@ -56,8 +56,4 @@ export class SignInComponent {
       this.router.navigateByUrl(Url.TODO)
     })
   }
-
-  goSingUp() {
-    this.router.navigateByUrl(Url.SIGN_UP)
-  }
 }
