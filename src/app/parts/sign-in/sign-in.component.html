@@ -2,53 +2,65 @@
   <mat-card-title>ログイン</mat-card-title>
   <mat-card-subtitle>sign-in</mat-card-subtitle>
   <mat-card-content>
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your email</mat-label>
-      <input
-        matInput
-        placeholder="pat@example.com"
-        [formControl]="email"
-        [matAutocomplete]="mail"
-      />
-      <mat-autocomplete #mail="matAutocomplete">
-        <mat-option *ngFor="let option of emailOptions" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error *ngIf="email.invalid">{{
-        getErrorMailMessage()
-      }}</mat-error> </mat-form-field
-    ><br />
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
-      <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
-        [formControl]="password"
-        [matAutocomplete]="pass"
-      />
-      <mat-autocomplete #pass="matAutocomplete">
-        <mat-option *ngFor="let option of passwordOptions" [value]="option">
-          {{ option }}
-        </mat-option>
-      </mat-autocomplete>
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-      >
-        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-      </button>
-      <mat-error *ngIf="password.invalid">{{
-        getErrorPassMessage()
-      }}</mat-error>
-    </mat-form-field>
+    <form action="" [formGroup]="signInForm" (ngSubmit)="signIn()">
+      <div class="sign-in__block">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="email"
+            [matAutocomplete]="mail"
+          />
+          <mat-autocomplete #mail="matAutocomplete">
+            <mat-option *ngFor="let option of emailOptions" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="errorHandling('email', 'required')">{{
+            errorMessage.REQUIRED_EMAIL
+          }}</mat-error>
+          <mat-error *ngIf="errorHandling('email', 'email')">{{
+            errorMessage.FORMAT_EMAIL
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="sign-in__block">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+            [matAutocomplete]="pass"
+          />
+          <mat-autocomplete #pass="matAutocomplete">
+            <mat-option *ngFor="let option of passwordOptions" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="errorHandling('password', 'required')">{{
+            errorMessage.REQUIRED_PASSWORD
+          }}</mat-error>
+          <mat-error *ngIf="errorHandling('password', 'minlength')">{{
+            errorMessage.MIN_LENGTH.template(4)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="sign-in__button">
+        <button type="submit" mat-raised-button color="primary">
+          ログイン
+        </button>
+      </div>
+    </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary" (click)="signIn()">
-      ログイン
-    </button>
-  </mat-card-actions>
 </mat-card>

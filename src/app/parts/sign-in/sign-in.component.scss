@@ -2,3 +2,13 @@
   max-width: 800px;
   margin: auto 0;
 }
+
+.sign-in {
+  &__block + &__block {
+    margin-top: 24px;
+  }
+  &__button {
+    display: block;
+    margin-top: 32px;
+  }
+}

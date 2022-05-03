@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { FormControl, Validators } from '@angular/forms'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
@@ -14,41 +14,51 @@ import * as AppActions from 'src/app/store/app/app-store.actions'
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
 })
-export class SignInComponent {
-  email = new FormControl('', [Validators.required, Validators.email])
-  password = new FormControl('', [Validators.required, Validators.minLength(4)])
+export class SignInComponent implements OnInit {
+  signInForm!: FormGroup
   hide = true
   emailOptions: string[] = ['xxx@gmail.com', 'aaa@gmail.com', 'sss@gmail.com']
   passwordOptions: string[] = ['12345', '1234']
+  errorMessage = ErrorMessage
 
   constructor(
     private auth: AuthService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    private fb: FormBuilder
   ) {}
 
-  getErrorMailMessage() {
-    if (this.email.hasError('required')) {
-      return ErrorMessage.REQUIRED_EMAIL
-    }
-
-    return this.email.hasError('email') ? ErrorMessage.FORMAT_EMAIL : ''
+  ngOnInit(): void {
+    this.signInForm = this.fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: [
+        '',
+        Validators.compose([Validators.required, Validators.minLength(4)]),
+      ],
+    })
   }
 
-  getErrorPassMessage() {
-    if (this.password.hasError('required')) {
-      return ErrorMessage.REQUIRED_PASSWORD
-    }
+  public errorHandling = (control: string, error: string) => {
+    return this.signInForm.controls[control].hasError(error)
+  }
 
-    return this.password.hasError('minlength')
-      ? ErrorMessage.MIN_LENGTH.template(4)
-      : ''
+  isVaildate() {
+    return (
+      this.errorHandling('email', 'required') ||
+      this.errorHandling('email', 'email') ||
+      this.errorHandling('password', 'required') ||
+      this.errorHandling('password', 'minlength')
+    )
   }
 
   signIn() {
+    if (this.isVaildate()) {
+      return
+    }
+    this.signInForm
     const user: User = {
-      mailAddress: this.email.value,
-      password: this.password.value,
+      mailAddress: this.signInForm.value.email,
+      password: this.signInForm.value.password,
     }
     this.auth.signIn(user).subscribe((res) => {
       localStorage.setItem('access_token', res.access_token)
