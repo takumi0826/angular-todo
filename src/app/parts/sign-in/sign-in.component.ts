@@ -55,7 +55,6 @@ export class SignInComponent implements OnInit {
     if (this.isVaildate()) {
       return
     }
-    this.signInForm
     const user: User = {
       mailAddress: this.signInForm.value.email,
       password: this.signInForm.value.password,

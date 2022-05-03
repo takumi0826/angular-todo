@@ -2,49 +2,63 @@
   <mat-card-title>新規登録</mat-card-title>
   <mat-card-subtitle>sign-up</mat-card-subtitle>
   <mat-card-content>
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your name</mat-label>
-      <input matInput placeholder="名前" [formControl]="name" />
-      <mat-error *ngIf="name.invalid">{{
-        getErrorNameMessage()
-      }}</mat-error> </mat-form-field
-    ><br />
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your email</mat-label>
-      <input matInput placeholder="pat@example.com" [formControl]="email" />
-      <mat-error *ngIf="email.invalid">{{
-        getErrorMailMessage()
-      }}</mat-error> </mat-form-field
-    ><br />
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
-      <input
-        matInput
-        [type]="hide ? 'password' : 'text'"
-        [formControl]="password"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-      >
-        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
-      </button>
-      <mat-error *ngIf="password.invalid">{{
-        getErrorPassMessage()
-      }}</mat-error> </mat-form-field
-    ><br />
+    <form action="" [formGroup]="signUpForm">
+      <div class="auth__block">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your name</mat-label>
+          <input matInput placeholder="名前" formControlName="name" />
+          <mat-error *ngIf="errorHandling('name', 'required')">{{
+            errorMessage.REQUIRED_NAME
+          }}</mat-error>
+          <mat-error *ngIf="errorHandling('name', 'maxlength')">{{
+            errorMessage.MAX_LENGTH.template(20)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="auth__block">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="pat@example.com"
+            formControlName="email"
+          />
+          <mat-error *ngIf="errorHandling('email', 'required')">{{
+            errorMessage.REQUIRED_EMAIL
+          }}</mat-error>
+          <mat-error *ngIf="errorHandling('email', 'email')">{{
+            errorMessage.FORMAT_EMAIL
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="auth__block">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="errorHandling('password', 'required')">{{
+            errorMessage.REQUIRED_PASSWORD
+          }}</mat-error>
+          <mat-error *ngIf="errorHandling('password', 'minlength')">{{
+            errorMessage.MIN_LENGTH.template(4)
+          }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="auth__buttonWrap">
+        <button mat-raised-button color="accent" type="submit">新規登録</button>
+      </div>
+    </form>
   </mat-card-content>
-  <mat-card-actions>
-    <button
-      mat-raised-button
-      color="accent"
-      appSingleClick
-      (singleClick)="signUp()"
-    >
-      新規登録
-    </button>
-  </mat-card-actions>
 </mat-card>

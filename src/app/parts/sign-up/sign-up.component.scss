@@ -1,0 +1,10 @@
+.auth {
+  &__block+&__block {
+    margin-top: 24px;
+  }
+
+  &__buttonWrap {
+    display: block;
+    margin-top: 32px;
+  }
+}

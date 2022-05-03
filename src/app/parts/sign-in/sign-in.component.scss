@@ -3,11 +3,11 @@
   margin: auto 0;
 }
 
-.sign-in {
+.auth {
   &__block + &__block {
     margin-top: 24px;
   }
-  &__button {
+  &__buttonWrap {
     display: block;
     margin-top: 32px;
   }
