@@ -27,6 +27,7 @@ export class AppEffects {
             AppActions.loginSuccess(),
           ]),
           catchError((error) => {
+            localStorage.removeItem('access_token')
             AppActions.loginFailure()
             return of(AppActions.authFailure())
           })

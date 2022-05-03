@@ -65,6 +65,6 @@ export class TodoComponent implements OnInit {
   }
 
   onGoEdit(val: string) {
-    this.router.navigateByUrl(val)
+    this.router.navigate([val])
   }
 }

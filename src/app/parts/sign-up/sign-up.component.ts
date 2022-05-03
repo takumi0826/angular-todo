@@ -64,7 +64,7 @@ export class SignUpComponent implements OnInit {
       password: this.signUpForm.value.password,
     }
     this.auth.signUp(user).subscribe((val) => {
-      this.router.navigateByUrl('/sign-in')
+      this.router.navigate(['/sign-in'])
       console.log(val)
     })
   }

@@ -40,6 +40,7 @@ const appReducer = createReducer(
   on(AppActions.loginFailure, (state) => ({
     ...state,
     isLoading: false,
+    isLogin: false,
   })),
   on(AppActions.appInit, (state) => initialState)
 )

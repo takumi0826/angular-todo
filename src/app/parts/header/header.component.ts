@@ -19,7 +19,7 @@ export class HeaderComponent {
   constructor(private router: Router, public dialog: MatDialog) {}
 
   goSignOut() {
-    this.router.navigateByUrl(Url.SIGN_OUT)
+    this.router.navigate([Url.SIGN_OUT])
   }
 
   openDialog() {

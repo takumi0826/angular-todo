@@ -58,7 +58,6 @@ export class AuthService {
     this.load.start()
     const url = `${this.host}/sign-up`
     return this.http.post<User>(url, user, <Object>this.httpOptions).pipe(
-      take(1),
       catchError((e) => {
         console.log(`エラーメッセージ: ${e.error.message}`)
         return EMPTY
@@ -72,10 +71,9 @@ export class AuthService {
 
   public signOut(): void {
     localStorage.removeItem('access_token')
-    localStorage.setItem('isFirstFlg', '0')
     this.store.dispatch(TaskActions.clear())
     this.store.dispatch(AppActions.appInit())
-    this.router.navigateByUrl(Url.TOP)
+    this.router.navigate([Url.TOP])
   }
 
   public fetchUser(): Observable<UserInfo> {
@@ -86,5 +84,18 @@ export class AuthService {
         console.log('fetchUser:処理終了')
       })
     )
+  }
+
+  public async isAuthenticated() {
+    const url = `${this.host}/authenticated`
+    let isLogin = true
+    await this.http
+      .get<boolean>(url, <Object>this.httpOptions)
+      .toPromise()
+      .catch(() => {
+        this.store.dispatch(AppActions.loginFailure())
+        isLogin = false
+      })
+    return isLogin
   }
 }

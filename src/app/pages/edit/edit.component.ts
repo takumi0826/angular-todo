@@ -45,11 +45,11 @@ export class EditComponent implements OnInit {
       return
     }
     this.taskService.update(task).subscribe((res) => {
-      this.router.navigateByUrl(Url.TODO)
+      this.router.navigate([Url.TODO])
     })
   }
 
   goTodo() {
-    this.router.navigateByUrl(Url.TODO)
+    this.router.navigate([Url.TODO])
   }
 }

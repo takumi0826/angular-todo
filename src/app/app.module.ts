@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { APP_INITIALIZER, Inject, NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
@@ -27,6 +27,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { SingleClickDirective } from './directive/single-click.directive'
 import { TopComponent } from './pages/top/top.component'
 import { SignUpComponent } from './parts/sign-up/sign-up.component'
+import { appInitializer } from './app-init/app-initializer'
+import { AuthService } from './services/auth.service'
+import { Store } from '@ngrx/store'
 
 @NgModule({
   declarations: [
@@ -61,6 +64,13 @@ import { SignUpComponent } from './parts/sign-up/sign-up.component'
     AppStoreModule,
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      multi: true,
+      deps: [[new Inject(Store)]],
+    },
+    AppStoreModule,
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

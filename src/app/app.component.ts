@@ -24,7 +24,6 @@ export class AppComponent {
     private domSanitizer: DomSanitizer,
     private matIconRegistry: MatIconRegistry
   ) {
-    this.store.dispatch(AppActions.auth())
     this.matIconRegistry.addSvgIcon(
       'github',
       this.domSanitizer.bypassSecurityTrustResourceUrl('assets/github.svg')
