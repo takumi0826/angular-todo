@@ -2,7 +2,7 @@
   <mat-card-title>新規登録</mat-card-title>
   <mat-card-subtitle>sign-up</mat-card-subtitle>
   <mat-card-content>
-    <form action="" [formGroup]="signUpForm">
+    <form action="" [formGroup]="signUpForm" (ngSubmit)="signUp()">
       <div class="auth__block">
         <mat-form-field appearance="fill">
           <mat-label>Enter your name</mat-label>
