@@ -15,6 +15,7 @@ export class SideMenuComponent {
   menu: SideMenu[] = [
     { name: 'タスク一覧', link: Url.TODO },
     { name: 'プロフィール', link: Url.PROFILE },
+    { name: '練習', link: Url.PRACTICE },
   ]
   constructor(private store: Store, private route: Router) {}
 }

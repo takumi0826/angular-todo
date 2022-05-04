@@ -7,4 +7,5 @@ export class Url {
   static readonly EDIT = Url.DASHBOARD + '/edit'
   static readonly TODO = Url.DASHBOARD + '/todo'
   static readonly PROFILE = Url.DASHBOARD + '/profile'
+  static readonly PRACTICE = Url.DASHBOARD + '/practice'
 }

@@ -9,7 +9,11 @@ import {
   tap,
 } from 'rxjs/operators'
 
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import {
@@ -73,7 +77,6 @@ export class AuthService {
     localStorage.removeItem('access_token')
     this.store.dispatch(TaskActions.clear())
     this.store.dispatch(AppActions.appInit())
-    this.router.navigate([Url.TOP])
   }
 
   public fetchUser(): Observable<UserInfo> {
@@ -92,9 +95,11 @@ export class AuthService {
     await this.http
       .get<boolean>(url, <Object>this.httpOptions)
       .toPromise()
-      .catch(() => {
-        this.store.dispatch(AppActions.loginFailure())
-        isLogin = false
+      .catch((err: HttpErrorResponse) => {
+        if (401 === err.status) {
+          this.signOut()
+          isLogin = false
+        }
       })
     return isLogin
   }

@@ -8,6 +8,7 @@ import { SignOutComponent } from './parts/sign-out/sign-out.component'
 import { TodoComponent } from './pages/todo/todo.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
 import { TopComponent } from './pages/top/top.component'
+import { PracticeComponent } from './pages/practice/practice.component'
 
 const routes: Routes = [
   {
@@ -20,6 +21,11 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'practice',
+        component: PracticeComponent,
         canActivate: [AuthGuard],
       },
     ],

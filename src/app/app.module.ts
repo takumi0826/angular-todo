@@ -29,7 +29,8 @@ import { TopComponent } from './pages/top/top.component'
 import { SignUpComponent } from './parts/sign-up/sign-up.component'
 import { appInitializer } from './app-init/app-initializer'
 import { AuthService } from './services/auth.service'
-import { Store } from '@ngrx/store'
+import { Store } from '@ngrx/store';
+import { PracticeComponent } from './pages/practice/practice.component'
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { Store } from '@ngrx/store'
     DashboardComponent,
     SingleClickDirective,
     TopComponent,
+    PracticeComponent,
   ],
   imports: [
     BrowserModule,

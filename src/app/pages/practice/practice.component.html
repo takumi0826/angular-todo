@@ -1,0 +1,25 @@
+<mat-card class="card">
+  <mat-card-title>ページング</mat-card-title>
+  <mat-card-content>
+    <div
+      class=""
+      *ngFor="let item of items | slice: itemBegin:itemBegin + dispCount"
+    >
+      {{ item }}
+    </div>
+  </mat-card-content>
+  <div>
+    <button
+      *ngFor="let item of arrayChunk(items, dispCount); index as i"
+      (click)="paging(i)"
+    >
+      {{ i + 1 }}
+    </button>
+  </div>
+</mat-card>
+<mat-card class="card">
+  <mat-card-title>メモリリーク回避</mat-card-title>
+  <mat-card-content>
+    <button mat-raised-button (click)="test()">takeUntil実行</button>
+  </mat-card-content>
+</mat-card>
