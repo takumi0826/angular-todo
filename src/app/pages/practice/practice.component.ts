@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { interval, Subject } from 'rxjs'
-import { takeUntil, tap } from 'rxjs/operators'
+import { BehaviorSubject, combineLatest, interval, Subject } from 'rxjs'
+import { map, takeUntil, tap } from 'rxjs/operators'
 import * as TaskActions from 'src/app/store/task/task.actions'
 import * as TaskSelectors from 'src/app/store/task/task.selectors'
 
@@ -15,6 +15,14 @@ export class PracticeComponent implements OnInit, OnDestroy {
 
   itemBegin = 0
   dispCount = 3
+
+  a$ = new BehaviorSubject(0)
+  b$ = this.a$.pipe(map((a) => a + 3))
+  c$ = combineLatest(this.a$, this.b$).pipe(map(([a, b]) => a * b))
+
+  a = 0
+  b = this.a + 3
+  c = this.a * this.b
 
   constructor(private store: Store) {}
 
@@ -45,5 +53,10 @@ export class PracticeComponent implements OnInit, OnDestroy {
 
   test() {
     this.destroyed$.next()
+  }
+
+  calc(num: number) {
+    this.a$.next(num)
+    this.a = num
   }
 }

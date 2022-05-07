@@ -5,3 +5,32 @@
 .mat-card-content {
   overflow: auto;
 }
+
+.table {
+  margin-top: 24px;
+  border-collapse: collapse;
+  & + & {
+    margin-left: 40px;
+  }
+  th,
+  td {
+    text-align: center;
+    border: solid 1px;
+    padding: 8px;
+  }
+  td {
+    width: 64px;
+  }
+}
+
+.reactive {
+  display: flex;
+}
+
+.calc {
+  margin-top: 24px;
+  display: flex;
+  &__button + &__button {
+    margin-left: 12px;
+  }
+}

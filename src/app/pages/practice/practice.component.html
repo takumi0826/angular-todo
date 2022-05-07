@@ -1,4 +1,53 @@
 <mat-card class="card">
+  <mat-card-title>リアクティブ</mat-card-title>
+  <mat-card-content>
+    <div class="reactive">
+      <table class="table">
+        <tr>
+          <th colspan="3">リアクティブな値</th>
+        </tr>
+        <tr>
+          <td>a</td>
+          <td>b</td>
+          <td>c</td>
+        </tr>
+        <tr>
+          <td>{{ a$ | async }}</td>
+          <td>{{ b$ | async }}</td>
+          <td>{{ c$ | async }}</td>
+        </tr>
+      </table>
+      <table class="table">
+        <tr>
+          <th colspan="3">リアクティブではない値</th>
+        </tr>
+        <tr>
+          <td>a</td>
+          <td>b</td>
+          <td>c</td>
+        </tr>
+        <tr>
+          <td>{{ a }}</td>
+          <td>{{ b }}</td>
+          <td>{{ c }}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="calc">
+      <button
+        class="calc__button"
+        mat-raised-button
+        color="primary"
+        *ngFor="let item of [1, 2, 3, 4, 5]; let i = index"
+        (click)="calc(i)"
+      >
+        a = {{ i }}
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="card">
   <mat-card-title>ngx-charts</mat-card-title>
   <mat-card-content>
     <app-pie-chart></app-pie-chart>
