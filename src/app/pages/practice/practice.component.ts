@@ -21,9 +21,10 @@ export class PracticeComponent implements OnInit, OnDestroy {
   private readonly destroyed$ = new Subject()
 
   ngOnInit(): void {
-    interval(1000)
-      .pipe(takeUntil(this.destroyed$), tap(console.log))
-      .subscribe()
+    console.log()
+    // interval(1000)
+    //   .pipe(takeUntil(this.destroyed$), tap(console.log))
+    //   .subscribe()
   }
 
   ngOnDestroy(): void {

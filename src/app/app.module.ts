@@ -29,8 +29,10 @@ import { TopComponent } from './pages/top/top.component'
 import { SignUpComponent } from './parts/sign-up/sign-up.component'
 import { appInitializer } from './app-init/app-initializer'
 import { AuthService } from './services/auth.service'
-import { Store } from '@ngrx/store';
+import { Store } from '@ngrx/store'
 import { PracticeComponent } from './pages/practice/practice.component'
+import { ChartsModule } from './charts/charts.module';
+import { PieChartComponent } from './parts/pie-chart/pie-chart.component'
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { PracticeComponent } from './pages/practice/practice.component'
     SingleClickDirective,
     TopComponent,
     PracticeComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { PracticeComponent } from './pages/practice/practice.component'
     HttpClientModule,
     TaskModule,
     AppStoreModule,
+    ChartsModule,
   ],
   providers: [
     {
