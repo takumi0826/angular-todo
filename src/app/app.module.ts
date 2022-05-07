@@ -31,8 +31,8 @@ import { appInitializer } from './app-init/app-initializer'
 import { AuthService } from './services/auth.service'
 import { Store } from '@ngrx/store'
 import { PracticeComponent } from './pages/practice/practice.component'
-import { ChartsModule } from './charts/charts.module';
-import { PieChartComponent } from './parts/pie-chart/pie-chart.component'
+import { ChartsModule } from './charts/charts.module'
+import { PieChartComponent } from './parts/charts/pie-chart/pie-chart.component'
 
 @NgModule({
   declarations: [
