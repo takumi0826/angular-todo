@@ -50,9 +50,7 @@ export class TodoComponent implements OnInit {
   update(): void {}
 
   onDeleteTask(id: number): void {
-    this.taskService.delete(id).subscribe((res) => {
-      this.loadAll()
-    })
+    this.store.dispatch(TaskActions.deleteTask({ id }))
   }
 
   onDoneTask($event: { id: number; isDone: boolean }) {

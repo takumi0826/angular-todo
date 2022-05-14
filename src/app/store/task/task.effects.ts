@@ -39,4 +39,19 @@ export class TaskEffects {
       )
     )
   )
+
+  delete$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TaskActions.deleteTask),
+      switchMap((actions) =>
+        this.taskService.delete(actions.id).pipe(
+          map((id) => TaskActions.deleteSuccess({ id })),
+          catchError((error: HttpErrorResponse) => {
+            console.log(error.error)
+            return of(TaskActions.deleteFailure())
+          })
+        )
+      )
+    )
+  )
 }

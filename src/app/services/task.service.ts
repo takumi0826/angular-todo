@@ -75,13 +75,8 @@ export class TaskService {
   public delete(id: number): Observable<number> {
     const url = `${this.host}/delete/v1?id=${id}`
     return this.http.delete<number>(url, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`エラーメッセージ: ${e.error.message}`)
-        return EMPTY
-      }),
-      finalize(() => {
-        console.log('deleteTask:処理終了')
-      })
+      filter((data: any) => !!data.affected),
+      map(() => id)
     )
   }
 

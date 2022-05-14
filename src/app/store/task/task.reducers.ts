@@ -38,6 +38,19 @@ const taskReducer = createReducer(
   on(TaskActions.createFailure, (state) => ({
     ...state,
     isLoading: false,
+  })),
+  on(TaskActions.deleteTask, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(TaskActions.deleteSuccess, (state, { id }) => ({
+    ...state,
+    isLoading: false,
+    tasks: state.tasks.filter((task) => task.id !== id),
+  })),
+  on(TaskActions.deleteFailure, (state) => ({
+    ...state,
+    isLoading: false,
   }))
 )
 

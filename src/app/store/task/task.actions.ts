@@ -22,4 +22,16 @@ export const createSuccess = createAction(
 
 export const createFailure = createAction('[Task] createFailure')
 
+export const deleteTask = createAction(
+  '[Task] deleteTask',
+  props<{ id: number }>()
+)
+
+export const deleteSuccess = createAction(
+  '[Task] deleteSuccess',
+  props<{ id: number }>()
+)
+
+export const deleteFailure = createAction('[Task] deleteFailure')
+
 export const clear = createAction('[Task] clear')
