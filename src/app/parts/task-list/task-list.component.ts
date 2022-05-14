@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core'
-import { TaskInfo } from 'src/app/model/type'
+import { Task } from 'src/app/model/type'
 
 @Component({
   selector: 'app-task-list',
@@ -14,14 +14,14 @@ import { TaskInfo } from 'src/app/model/type'
   styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent implements OnChanges {
-  @Input() tasks: TaskInfo[] | null = []
+  @Input() tasks: Task[] | null = []
   @Input() isLoading!: boolean | null
   @Input() isCompleted!: boolean
   @Output() goEdit = new EventEmitter<string>()
   @Output() doneTask = new EventEmitter<{ id: number; isDone: boolean }>()
   @Output() deleteTask = new EventEmitter<number>()
 
-  taskInfo: TaskInfo[] = []
+  taskInfo: Task[] = []
 
   constructor() {}
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Url } from 'src/app/constant/url-const'
-import { TaskInfo } from 'src/app/model/type'
+import { Task } from 'src/app/model/type'
 
 @Component({
   selector: 'app-task-list-item',
@@ -8,7 +8,7 @@ import { TaskInfo } from 'src/app/model/type'
   styleUrls: ['./task-list-item.component.scss'],
 })
 export class TaskListItemComponent {
-  @Input() task!: TaskInfo
+  @Input() task!: Task
   @Input() isLoading!: boolean | null
   @Input() isCompleted!: boolean
   @Output() goEdit = new EventEmitter<string>()

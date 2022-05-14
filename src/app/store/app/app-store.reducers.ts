@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store'
-import { TaskInfo, UserInfo } from 'src/app/model/type'
+import { Task, UserInfo } from 'src/app/model/type'
 import * as AppActions from './app-store.actions'
 
 export const appFeatureKey = 'app'

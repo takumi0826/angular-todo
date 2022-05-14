@@ -16,13 +16,7 @@ import {
 } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
-import {
-  User,
-  JwtToken,
-  CreateUser,
-  UserInfo,
-  TaskInfo,
-} from 'src/app/model/type'
+import { User, JwtToken, CreateUser, UserInfo, Task } from 'src/app/model/type'
 import { Store } from '@ngrx/store'
 import * as TaskActions from 'src/app/store/task/task.actions'
 import { LoadingService } from './loading.service'

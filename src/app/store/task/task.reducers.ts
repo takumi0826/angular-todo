@@ -1,12 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store'
-import { TaskInfo } from 'src/app/model/type'
+import { Task } from 'src/app/model/type'
 import * as TaskActions from './task.actions'
 
 export const taskFeatureKey = 'task'
 
 export interface TaskState {
   isLoading: boolean
-  tasks: TaskInfo[]
+  tasks: Task[]
 }
 
 export const initialState: TaskState = {
@@ -23,6 +23,19 @@ const taskReducer = createReducer(
     tasks,
   })),
   on(TaskActions.loadAllFailure, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(TaskActions.create, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(TaskActions.createSuccess, (state, { task }) => ({
+    ...state,
+    isLoading: false,
+    tasks: [...state.tasks, task],
+  })),
+  on(TaskActions.createFailure, (state) => ({
     ...state,
     isLoading: false,
   }))

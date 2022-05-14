@@ -1,10 +1,10 @@
 import { EMPTY, Observable, throwError } from 'rxjs'
-import { catchError, finalize } from 'rxjs/operators'
+import { catchError, filter, finalize, map } from 'rxjs/operators'
 
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 
-import { TaskInfo, TaskItem } from '../model/type'
+import { Task, TaskResponse } from '../model/type'
 
 @Injectable({
   providedIn: 'root',
@@ -20,31 +20,35 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  public create(task: TaskItem): Observable<number> {
+  public create(task: Pick<Task, 'title' | 'isDone'>): Observable<Task> {
     const url = `${this.host}/create/v1`
-    return this.http.post<number>(url, task, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`エラーメッセージ: ${e.error.message}`)
-        return EMPTY
-      }),
-      finalize(() => {
-        console.log('create:処理終了')
-      })
-    )
+    return this.http
+      .post<TaskResponse>(url, task, <Object>this.httpOptions)
+      .pipe(
+        filter((data) => !!data),
+        map((data: TaskResponse) => {
+          return {
+            id: data.id,
+            title: data.title,
+            content: data.content,
+            isDone: data.isDone,
+          }
+        })
+      )
   }
 
-  public loadAll(): Observable<TaskInfo[]> {
+  public loadAll(): Observable<Task[]> {
     const url = `${this.host}/get-all/v1`
-    return this.http.get<TaskInfo[]>(url, <Object>this.httpOptions).pipe(
+    return this.http.get<Task[]>(url, <Object>this.httpOptions).pipe(
       finalize(() => {
         console.log('loadAll:処理終了')
       })
     )
   }
 
-  public load(id: number): Observable<TaskInfo> {
+  public load(id: number): Observable<Task> {
     const url = `${this.host}/get-one/v1?id=${id}`
-    return this.http.get<TaskInfo>(url, <Object>this.httpOptions).pipe(
+    return this.http.get<Task>(url, <Object>this.httpOptions).pipe(
       catchError((e) => {
         console.log(`エラーメッセージ: ${e.error.message}`)
         return EMPTY
@@ -55,7 +59,7 @@ export class TaskService {
     )
   }
 
-  public update(task: TaskInfo): Observable<number> {
+  public update(task: Task): Observable<number> {
     const url = `${this.host}/update/v1`
     return this.http.put<number>(url, task, <Object>this.httpOptions).pipe(
       catchError((e) => {

@@ -4,6 +4,7 @@ import { Actions, ofType, createEffect, act } from '@ngrx/effects'
 import { of } from 'rxjs'
 import { switchMap, map, catchError, concatMap, tap } from 'rxjs/operators'
 import * as TaskActions from './task.actions'
+import { HttpErrorResponse } from '@angular/common/http'
 
 @Injectable()
 export class TaskEffects {
@@ -15,7 +16,25 @@ export class TaskEffects {
       switchMap(() =>
         this.taskService.loadAll().pipe(
           map((tasks) => TaskActions.loadAllSuccess({ tasks })),
-          catchError((error) => of(TaskActions.loadAllFailure()))
+          catchError((error: HttpErrorResponse) => {
+            console.log(error.error)
+            return of(TaskActions.loadAllFailure())
+          })
+        )
+      )
+    )
+  )
+
+  create$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TaskActions.create),
+      switchMap((actions) =>
+        this.taskService.create(actions.task).pipe(
+          map((task) => TaskActions.createSuccess({ task })),
+          catchError((error: HttpErrorResponse) => {
+            console.log(error.error)
+            return of(TaskActions.createFailure())
+          })
         )
       )
     )

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { AuthService } from 'src/app/services/auth.service'
 import { TaskService } from 'src/app/services/task.service'
-import { TaskInfo } from 'src/app/model/type'
+import { Task } from 'src/app/model/type'
 import { select, Store } from '@ngrx/store'
 import { Observable } from 'rxjs'
 import { filter } from 'rxjs/operators'
@@ -15,8 +15,8 @@ import * as TaskSelectors from 'src/app/store/task/task.selectors'
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
-  completeTask: TaskInfo[] = []
-  incompleteTask: TaskInfo[] = []
+  completeTask: Task[] = []
+  incompleteTask: Task[] = []
   task$ = this.store.select(TaskSelectors.getTasks)
   isLoading$ = this.store.select(TaskSelectors.getLoading)
   taskTitle: string = ''
@@ -43,10 +43,8 @@ export class TodoComponent implements OnInit {
       content: '',
       isDone: false,
     }
-    this.taskService.create(param).subscribe((res) => {
-      this.taskTitle = ''
-      this.loadAll()
-    })
+    this.store.dispatch(TaskActions.create({ task: param }))
+    this.taskTitle = ''
   }
 
   update(): void {}

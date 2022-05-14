@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { TaskInfo, UserInfo } from '../../model/type'
+import { Task, UserInfo } from '../../model/type'
 
 export const auth = createAction('[App] auth')
 

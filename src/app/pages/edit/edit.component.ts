@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Url } from 'src/app/constant/url-const'
 import { ModalComponent } from 'src/app/modal/error/modal.component'
-import { TaskInfo } from 'src/app/model/type'
+import { Task } from 'src/app/model/type'
 
 import { TaskService } from '../../services/task.service'
 
@@ -14,7 +14,7 @@ import { TaskService } from '../../services/task.service'
 })
 export class EditComponent implements OnInit {
   routeId: number = 0
-  taskInfo: TaskInfo = {
+  taskInfo: Task = {
     id: 0,
     title: '',
     content: undefined,
@@ -40,7 +40,7 @@ export class EditComponent implements OnInit {
     })
   }
 
-  edit(task: TaskInfo) {
+  edit(task: Task) {
     if (!task.title.trim()) {
       return
     }
