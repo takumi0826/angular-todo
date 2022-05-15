@@ -34,4 +34,16 @@ export const deleteSuccess = createAction(
 
 export const deleteFailure = createAction('[Task] deleteFailure')
 
+export const isDone = createAction(
+  '[Task] isDone',
+  props<{ id: number; isDone: boolean }>()
+)
+
+export const isDoneSuccess = createAction(
+  '[Task] isDoneSuccess',
+  props<{ id: number; isDone: boolean }>()
+)
+
+export const isDoneFailure = createAction('[Task] isDoneFailure')
+
 export const clear = createAction('[Task] clear')

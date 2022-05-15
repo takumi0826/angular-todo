@@ -55,9 +55,7 @@ export class TodoComponent implements OnInit {
 
   onDoneTask($event: { id: number; isDone: boolean }) {
     const { id, isDone } = $event
-    this.taskService.doneTask(id, isDone).subscribe((res) => {
-      this.loadAll()
-    })
+    this.store.dispatch(TaskActions.isDone({ id, isDone }))
   }
 
   onGoEdit(val: string) {

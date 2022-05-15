@@ -80,18 +80,19 @@ export class TaskService {
     )
   }
 
-  public doneTask(id: number, isDone: boolean): Observable<number> {
+  public doneTask(
+    id: number,
+    isDone: boolean
+  ): Observable<{ id: number; isDone: boolean }> {
     const url = `${this.host}/done/v1`
     return this.http
       .put<number>(url, { id, isDone }, <Object>this.httpOptions)
       .pipe(
-        catchError((e) => {
-          console.log(`エラーメッセージ: ${e.error.message}`)
-          return EMPTY
-        }),
-        finalize(() => {
-          console.log('doneTask:処理終了')
-        })
+        filter((data: any) => !!data.affected),
+        map(() => ({
+          id,
+          isDone,
+        }))
       )
   }
 }

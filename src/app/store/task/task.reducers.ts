@@ -51,6 +51,22 @@ const taskReducer = createReducer(
   on(TaskActions.deleteFailure, (state) => ({
     ...state,
     isLoading: false,
+  })),
+  on(TaskActions.isDone, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(TaskActions.isDoneSuccess, (state, { id, isDone }) => ({
+    ...state,
+    isLoading: false,
+    tasks: state.tasks.map((task) => {
+      if (task.id !== id) return task
+      return { ...task, isDone }
+    }),
+  })),
+  on(TaskActions.isDoneFailure, (state) => ({
+    ...state,
+    isLoading: false,
   }))
 )
 

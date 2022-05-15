@@ -54,4 +54,19 @@ export class TaskEffects {
       )
     )
   )
+
+  done$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TaskActions.isDone),
+      switchMap((actions) =>
+        this.taskService.doneTask(actions.id, actions.isDone).pipe(
+          map(({ id, isDone }) => TaskActions.isDoneSuccess({ id, isDone })),
+          catchError((error: HttpErrorResponse) => {
+            console.log(error.error)
+            return of(TaskActions.isDoneFailure())
+          })
+        )
+      )
+    )
+  )
 }
