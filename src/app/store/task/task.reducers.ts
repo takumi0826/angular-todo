@@ -60,8 +60,10 @@ const taskReducer = createReducer(
     ...state,
     isLoading: false,
     tasks: state.tasks.map((task) => {
-      if (task.id !== id) return task
-      return { ...task, isDone }
+      if (task.id === id) {
+        return { ...task, isDone }
+      }
+      return task
     }),
   })),
   on(TaskActions.isDoneFailure, (state) => ({
