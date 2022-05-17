@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Task, User, UserInfo } from '../../model/type'
+import { CreateUser, Task, User, UserInfo } from '../../model/type'
 
 export const auth = createAction('[App] auth')
 
@@ -10,10 +10,19 @@ export const authSuccess = createAction(
 
 export const authFailure = createAction('[App] authFailure')
 
-export const login = createAction('[App] login', props<{ user: User }>())
+export const signIn = createAction('[App] signIn', props<{ user: User }>())
 
-export const loginSuccess = createAction('[App] loginSuccess')
+export const signInSuccess = createAction('[App] signInSuccess')
 
-export const loginFailure = createAction('[App] loginFailure')
+export const signInFailure = createAction('[App] signInFailure')
+
+export const signUp = createAction(
+  '[App] signUp',
+  props<{ user: CreateUser }>()
+)
+
+export const signUpSuccess = createAction('[App] signUpSuccess')
+
+export const signUpFailure = createAction('[App] signUpFailure')
 
 export const appInit = createAction('[App] appInit')

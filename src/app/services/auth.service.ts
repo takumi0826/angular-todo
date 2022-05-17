@@ -2,6 +2,7 @@ import { EMPTY, Observable, of, pipe, throwError } from 'rxjs'
 import {
   catchError,
   concatMap,
+  filter,
   finalize,
   map,
   mergeMap,
@@ -56,10 +57,7 @@ export class AuthService {
     this.load.start()
     const url = `${this.host}/sign-up`
     return this.http.post<User>(url, user, <Object>this.httpOptions).pipe(
-      catchError((e) => {
-        console.log(`エラーメッセージ: ${e.error.message}`)
-        return EMPTY
-      }),
+      filter((data) => !!data),
       finalize(() => {
         console.log('処理終了')
         this.load.stop()

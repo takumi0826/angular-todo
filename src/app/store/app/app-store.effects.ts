@@ -17,7 +17,11 @@ import { Router } from '@angular/router'
 
 @Injectable()
 export class AppEffects {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   getUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -26,11 +30,11 @@ export class AppEffects {
         this.authService.fetchUser().pipe(
           mergeMap((user) => [
             AppActions.authSuccess({ user }),
-            AppActions.loginSuccess(),
+            AppActions.signInSuccess(),
           ]),
           catchError((error) => {
             localStorage.removeItem('access_token')
-            AppActions.loginFailure()
+            AppActions.signInFailure()
             return of(AppActions.authFailure())
           })
         )
@@ -38,22 +42,49 @@ export class AppEffects {
     )
   )
 
-  login$ = createEffect(() =>
+  signIn$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AppActions.login),
+      ofType(AppActions.signIn),
       switchMap((actions) =>
         this.authService.signIn(actions.user).pipe(
-          map((res) => {
+          mergeMap((res) => {
             localStorage.setItem('access_token', res.access_token)
-            return AppActions.auth()
+            return [
+              AppActions.authSuccess({ user: res.user }),
+              AppActions.signInSuccess(),
+            ]
           }),
           catchError((error) => {
             localStorage.removeItem('access_token')
-            AppActions.loginFailure()
+            AppActions.signInFailure()
             return of(AppActions.authFailure())
           })
         )
       )
     )
+  )
+
+  signUp$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.signUp),
+      switchMap((actions) =>
+        this.authService.signUp(actions.user).pipe(
+          map(() => AppActions.signUpSuccess()),
+          catchError((error) => of(AppActions.signUpFailure()))
+        )
+      )
+    )
+  )
+
+  signUpSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AppActions.signUpSuccess),
+        tap(() => {
+          alert('アカウントの作成が完了しました')
+          this.router.navigate([Url.TOP])
+        })
+      ),
+    { dispatch: false }
   )
 }

@@ -7,5 +7,6 @@ import { LoadingService } from '../../services/loading.service'
   styleUrls: ['./loading.component.scss'],
 })
 export class LoadingComponent {
-  constructor(public load: LoadingService) {}
+  isShow$ = this.load.isShow$
+  constructor(private load: LoadingService) {}
 }

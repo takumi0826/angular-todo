@@ -4,6 +4,11 @@ import { Router } from '@angular/router'
 import { AuthService } from 'src/app/services/auth.service'
 import { CreateUser } from 'src/app/model/type'
 import { ErrorMessage } from 'src/app/constant/error-massage-const'
+import { Store } from '@ngrx/store'
+import * as AppActions from 'src/app/store/app/app-store.actions'
+import * as AppSelectors from 'src/app/store/app/app-store.selectors'
+import { filter, first, withLatestFrom } from 'rxjs/operators'
+import { Url } from 'src/app/constant/url-const'
 
 @Component({
   selector: 'app-sign-up',
@@ -18,7 +23,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -58,14 +64,12 @@ export class SignUpComponent implements OnInit {
     if (this.isVaildate()) {
       return
     }
+    const { name, email: mailAddress, password } = this.signUpForm.value
     const user: CreateUser = {
-      name: this.signUpForm.value.name,
-      mailAddress: this.signUpForm.value.email,
-      password: this.signUpForm.value.password,
+      name,
+      mailAddress,
+      password,
     }
-    this.auth.signUp(user).subscribe((val) => {
-      this.router.navigate(['/sign-in'])
-      console.log(val)
-    })
+    this.store.dispatch(AppActions.signUp({ user }))
   }
 }

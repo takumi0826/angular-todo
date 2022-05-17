@@ -1,3 +1,3 @@
-<div class="loading" *ngIf="load.isShow">
+<div class="loading" *ngIf="isShow$ | async">
   <mat-spinner></mat-spinner>
 </div>

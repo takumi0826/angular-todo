@@ -31,16 +31,25 @@ const appReducer = createReducer(
     ...state,
     isLoading: false,
   })),
-  on(AppActions.login, (state) => ({ ...state, isLoading: true })),
-  on(AppActions.loginSuccess, (state) => ({
+  on(AppActions.signIn, (state) => ({ ...state, isLoading: true })),
+  on(AppActions.signInSuccess, (state) => ({
     ...state,
     isLoading: false,
     isLogin: true,
   })),
-  on(AppActions.loginFailure, (state) => ({
+  on(AppActions.signInFailure, (state) => ({
     ...state,
     isLoading: false,
     isLogin: false,
+  })),
+  on(AppActions.signUp, (state) => ({ ...state, isLoading: true })),
+  on(AppActions.signUpSuccess, (state) => ({
+    ...state,
+    isLoading: false,
+  })),
+  on(AppActions.signUpFailure, (state) => ({
+    ...state,
+    isLoading: false,
   })),
   on(AppActions.appInit, (state) => initialState)
 )

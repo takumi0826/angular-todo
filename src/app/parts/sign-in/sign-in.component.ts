@@ -61,7 +61,7 @@ export class SignInComponent implements OnInit {
       mailAddress: this.signInForm.value.email,
       password: this.signInForm.value.password,
     }
-    this.store.dispatch(AppActions.login({ user }))
+    this.store.dispatch(AppActions.signIn({ user }))
     this.store
       .select(AppSelectors.getLogin)
       .pipe(
