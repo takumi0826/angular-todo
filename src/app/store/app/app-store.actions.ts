@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Task, UserInfo } from '../../model/type'
+import { Task, User, UserInfo } from '../../model/type'
 
 export const auth = createAction('[App] auth')
 
@@ -10,7 +10,7 @@ export const authSuccess = createAction(
 
 export const authFailure = createAction('[App] authFailure')
 
-export const login = createAction('[App] login')
+export const login = createAction('[App] login', props<{ user: User }>())
 
 export const loginSuccess = createAction('[App] loginSuccess')
 

@@ -75,12 +75,7 @@ export class AuthService {
 
   public fetchUser(): Observable<UserInfo> {
     const url = `${this.host}/profile`
-
-    return this.http.get<UserInfo>(url, <Object>this.httpOptions).pipe(
-      finalize(() => {
-        console.log('fetchUser:処理終了')
-      })
-    )
+    return this.http.get<UserInfo>(url, <Object>this.httpOptions)
   }
 
   public async isAuthenticated() {

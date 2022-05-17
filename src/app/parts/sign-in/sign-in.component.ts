@@ -8,6 +8,8 @@ import { Url } from 'src/app/constant/url-const'
 import { AuthService } from 'src/app/services/auth.service'
 import { User, UserInfo } from 'src/app/model/type'
 import * as AppActions from 'src/app/store/app/app-store.actions'
+import * as AppSelectors from 'src/app/store/app/app-store.selectors'
+import { filter, first, withLatestFrom } from 'rxjs/operators'
 
 @Component({
   selector: 'app-sign-in',
@@ -59,10 +61,16 @@ export class SignInComponent implements OnInit {
       mailAddress: this.signInForm.value.email,
       password: this.signInForm.value.password,
     }
-    this.auth.signIn(user).subscribe((res) => {
-      localStorage.setItem('access_token', res.access_token)
-      this.store.dispatch(AppActions.auth())
-      this.router.navigateByUrl(Url.TODO)
-    })
+    this.store.dispatch(AppActions.login({ user }))
+    this.store
+      .select(AppSelectors.getLogin)
+      .pipe(
+        withLatestFrom(this.store.select(AppSelectors.getLoading)),
+        filter(([isLogin, isLoading]) => !isLoading && isLogin),
+        first()
+      )
+      .subscribe(() => {
+        this.router.navigate([Url.TODO])
+      })
   }
 }
