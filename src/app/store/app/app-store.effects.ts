@@ -14,13 +14,14 @@ import * as AppActions from './app-store.actions'
 import { AuthService } from 'src/app/services/auth.service'
 import { Url } from 'src/app/constant/url-const'
 import { Router } from '@angular/router'
+import { TopService } from 'src/app/services/top.service'
 
 @Injectable()
 export class AppEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private router: Router
+    private topService: TopService
   ) {}
 
   getUser$ = createEffect(() =>
@@ -82,7 +83,7 @@ export class AppEffects {
         ofType(AppActions.signUpSuccess),
         tap(() => {
           alert('アカウントの作成が完了しました')
-          this.router.navigate([Url.TOP])
+          this.topService.selectIndex(0)
         })
       ),
     { dispatch: false }

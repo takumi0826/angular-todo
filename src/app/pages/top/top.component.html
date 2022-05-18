@@ -1,4 +1,4 @@
-<mat-tab-group [selectedIndex]="selected">
+<mat-tab-group #tabGroup [selectedIndex]="tabIndex$ | async">
   <mat-tab label="ログイン">
     <app-sign-in></app-sign-in>
   </mat-tab>
