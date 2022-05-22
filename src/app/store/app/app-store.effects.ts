@@ -15,13 +15,16 @@ import { AuthService } from 'src/app/services/auth.service'
 import { Url } from 'src/app/constant/url-const'
 import { Router } from '@angular/router'
 import { TopService } from 'src/app/services/top.service'
+import { MatDialog } from '@angular/material/dialog'
+import { ModalComponent } from 'src/app/modal/error/modal.component'
 
 @Injectable()
 export class AppEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private topService: TopService
+    private topService: TopService,
+    public dialog: MatDialog
   ) {}
 
   getUser$ = createEffect(() =>
@@ -82,7 +85,11 @@ export class AppEffects {
       this.actions$.pipe(
         ofType(AppActions.signUpSuccess),
         tap(() => {
-          alert('アカウントの作成が完了しました')
+          this.dialog.open(ModalComponent, {
+            data: {
+              message: 'アカウントの作成が完了しました',
+            },
+          })
           this.topService.selectIndex(0)
         })
       ),
