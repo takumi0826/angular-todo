@@ -1,8 +1,8 @@
-import { IsValidPipe } from './is-valid.pipe';
+import { IsValidPipe } from './is-valid.pipe'
 
-describe('IsValidPipe', () => {
+xdescribe('IsValidPipe', () => {
   it('create an instance', () => {
-    const pipe = new IsValidPipe();
-    expect(pipe).toBeTruthy();
-  });
-});
+    const pipe = new IsValidPipe()
+    expect(pipe).toBeTruthy()
+  })
+})

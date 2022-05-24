@@ -1,8 +1,8 @@
-import { AlertDirective } from './alert.directive';
+import { AlertDirective } from './alert.directive'
 
-describe('AlertDirective', () => {
+xdescribe('AlertDirective', () => {
   it('should create an instance', () => {
-    const directive = new AlertDirective();
-    expect(directive).toBeTruthy();
-  });
-});
+    const directive = new AlertDirective()
+    expect(directive).toBeTruthy()
+  })
+})
