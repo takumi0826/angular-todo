@@ -14,7 +14,7 @@ describe('TopService', () => {
     expect(service).toBeTruthy()
   })
 
-  it('てすとーーー', () => {
+  it('selectIndex', () => {
     service.selectIndex(1)
     service.tabIndex$.subscribe((index) => {
       expect(1).toEqual(index)
